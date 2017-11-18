@@ -14,4 +14,4 @@ api.add_resource(HelloWorld, '/')
 api.add_resource(skills.hi.Hi, '/api' + skills.hi.URL)
 
 if __name__ == '__main__':
-    app.run(debug=True, host= '0.0.0.0')
+    app.run(debug=True, host= '0.0.0.0', port=5000)
