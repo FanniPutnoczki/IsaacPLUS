@@ -1,29 +1,65 @@
 <!doctype html>
 <html lang="en" ng-app="App">
 
-  <head>
+<head>
 
-    <meta charset="utf-8">
+  <meta charset="utf-8">
 
-    <title>App</title>
+  <title>Home Assistant</title>
 
-    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="lib/angular-material/angular-material.css" />
+  <link rel="stylesheet" href="app.css" />
 
-    <script src="lib/jquery/dist/jquery.js"></script>
-    <script src="lib/angular/angular.js"></script>
-    <script src="lib/angular-animate/angular-animate.js"></script>
-    <script src="lib/angular-resource/angular-resource.js"></script>
-    <script src="lib/angular-route/angular-route.js"></script>
-    <script src="app.js"></script>
+  <script src="lib/angular/angular.js"></script>
+  <script src="lib/angular-animate/angular-animate.js"></script>
+  <script src="lib/angular-aria/angular-aria.js"></script>
+  <script src="lib/angular-messages/angular-messages.js"></script>
+  <script src="lib/angular-route/angular-route.js"></script>
+  <script src="lib/angular-material/angular-material.js"></script>
 
-  </head>
+  <script src="app.js"></script>
 
-  <body>
+</head>
 
-    <div ng-controller="mainController" class="view-container">
-      <h1> {{hi}} </h1>
-    </div>
+<body>
 
-  </body>
+  <div ng-controller="mainController" ng-cloak>
+    
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h1>Home Assistant Dashboard</h1>
+      </div>
+    </md-toolbar>
+
+    <md-content class="md-padding">
+      <md-nav-bar md-no-ink-bar="disableInkBar" md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
+        <md-nav-item md-nav-click="goto('page1')" name="page1">
+          Control Panel
+        </md-nav-item>
+        <md-nav-item md-nav-click="goto('page2')" name="page2">
+          Notifications
+        </md-nav-item>
+        <md-nav-item md-nav-click="goto('page3')" name="page3">
+          Settings
+        </md-nav-item>
+        <!-- these require actual routing with ui-router or ng-route, so they
+          won't work in the demo
+          <md-nav-item md-nav-href="#page4" name="page5">Page Four</md-nav-item>
+          <md-nav-item md-nav-sref="app.page5" name="page4">Page Five</md-nav-item>
+          You can also add options for the <code>ui-sref-opts</code> attribute.
+          <md-nav-item md-nav-sref="page6" sref-opts="{reload:true, notify:true}">
+            Page Six
+          </md-nav-item>
+          -->
+      </md-nav-bar>
+      <div class="ext-content">
+        External content for `<span>{{currentNavItem}}</span>`.
+      </div>
+    </md-content>
+
+  </div>
+
+
+</body>
 
 </html>
