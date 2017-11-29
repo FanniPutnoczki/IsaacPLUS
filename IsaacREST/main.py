@@ -1,9 +1,17 @@
 from flask import Flask
 from flask_restful import Resource, Api
 import skills.hi
+import settings
+from flask_pymongo import PyMongo
 
 app = Flask(__name__)
+
+app.config['MONGO_DBNAME'] = settings.MONGO_DBNAME
+app.config['MONGO_URI'] = settings.MONGO_URI
+
 api = Api(app)
+
+mongo = PyMongo(app)
 
 class HelloWorld(Resource):
     def get(self):
