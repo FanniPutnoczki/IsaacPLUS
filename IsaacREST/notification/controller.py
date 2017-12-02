@@ -1,12 +1,19 @@
+from flask import Blueprint
 
-'''
-Created on 2017. nov. 29.
+notif_api = Blueprint('notif_api', __name__)
 
-@author: Fox
-'''
-from main import app
-    
-@app.route('/he')
-def he():
+@notif_api.route('/add')
+def add():
     return {"he": "he"}
-        
+
+@notif_api.route('/remove')
+def remove():
+    return {"he": "he"}
+
+@notif_api.route('/get/<id>')
+def get(id):
+    return id
+
+@notif_api.route('/get')
+def getAll():
+    return {"he": "he"}
