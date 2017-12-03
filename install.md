@@ -17,5 +17,3 @@
 sudo pip install flask-restful
 5. install mongodb then install the python mongo module
 pip install flask-pymongo
-
-
