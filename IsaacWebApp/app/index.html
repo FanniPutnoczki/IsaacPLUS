@@ -5,7 +5,7 @@
 
   <meta charset="utf-8">
 
-  <title>Home Assistant</title>
+  <title>App</title>
 
   <link rel="stylesheet" href="lib/angular-material/angular-material.css" />
   <link rel="stylesheet" href="app.css" />
@@ -14,17 +14,21 @@
   <script src="lib/angular-animate/angular-animate.js"></script>
   <script src="lib/angular-aria/angular-aria.js"></script>
   <script src="lib/angular-messages/angular-messages.js"></script>
-  <script src="lib/angular-route/angular-route.js"></script>
+  <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
   <script src="lib/angular-material/angular-material.js"></script>
-
+  
+  
+  <script src="n/notif.js"></script>
   <script src="app.js"></script>
+  <script src="d/dashboard.js"></script>
+  <script src="s/skills.js"></script>
 
 </head>
 
 <body>
 
   <div ng-controller="mainController" ng-cloak>
-    
+
     <md-toolbar>
       <div class="md-toolbar-tools">
         <h1>Home Assistant Dashboard</h1>
@@ -34,23 +38,15 @@
     <md-content class="md-padding">
 
       <md-nav-bar md-no-ink-bar="disableInkBar" md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
-        <md-nav-item md-nav-click="goto('page1')" name="page1">
-          Control Panel
-        </md-nav-item>
-        <md-nav-item md-nav-click="goto('page2')" name="page2">
-          Notifications
-        </md-nav-item>
-        <md-nav-item md-nav-click="goto('page3')" name="page3">
-          Settings
-        </md-nav-item>
-        <md-nav-item md-nav-href="#page4" name="notifs">Notifications</md-nav-item>
-        <md-nav-item md-nav-sref="app.page5" name="skills">Skills</md-nav-item>
+        <md-nav-item md-nav-href="#!/dashboard" name="Dashboard">Control Panel</md-nav-item>
+        <md-nav-item md-nav-href="#!/notifications" name="Notifications">Notifications</md-nav-item>
+        <md-nav-item md-nav-href="#!/skills" name="Skills">Skills</md-nav-item>
+        <!-- <md-nav-item md-nav-href="#!/settings" name="Settings">Settings</md-nav-item> -->
       </md-nav-bar>
       <div class="ext-content">
-        <div ng-view></div>
-        External content for `<span>{{currentNavItem}}</span>`.
+        <ui-view></ui-view>
       </div>
-      
+
     </md-content>
 
   </div>

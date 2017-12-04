@@ -1,0 +1,51 @@
+<div layout="column" ng-cloak class="md-inline-form">
+    <md-content layout-padding>
+        <div>
+            <form name="form">
+
+                <md-input-container class="md-block">
+                    <label>Time</label>
+                    <!-- <md-time-picker ng-model="time" message="message" read-only="readonly" mandatory="required" no-meridiem no-auto-switch></md-time-picker> -->
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <md-switch md-invert ng-model="notif.recurring" class="md-primary" name="special" ng-model="project.special">
+                        Recurring
+                    </md-switch>
+                </md-input-container>
+
+                <md-input-container ng-show="notif.recurring" class="md-block">
+                    <div class="demo-select-all-checkboxes" flex="100" ng-repeat="item in ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']">
+                        <md-checkbox>
+                            {{ item }}
+                        </md-checkbox>
+                    </div>
+                </md-input-container>
+
+                <md-input-container ng-show="!notif.recurring" class="md-block">
+                    <label>Date</label>
+                    <md-datepicker ng-model="ctrl.myDate" md-placeholder="Enter date"></md-datepicker>
+                </md-input-container>
+
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Task</label>
+                    <md-select ng-model="user.state">
+                        <md-option ng-repeat="state in states" value="{{state.abbrev}}">
+                            {{state.abbrev}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>Message</label>
+                    <textarea ng-model="notif.message" md-maxlength="150" rows="3" md-select-on-focus></textarea>
+                </md-input-container>
+
+                <div>
+                    <md-button type="submit">Submit</md-button>
+                </div>
+
+            </form>
+        </div>
+    </md-content>
+</div>

@@ -1,17 +1,19 @@
-angular.module("App", [
+app = angular.module("App", [
+    'ui.router',
     'ngMaterial',
-    'ngRoute'
+    'notifications'
 ])
-.controller('mainController', function($scope, $routeProvider){
+.controller('mainController', function($scope){
     $scope.hi = "Hello World";
-    $routeProvider
-        .when('/', {
-            templateUrl: 'dashboard/dashboard.html'
-        })
-        .when('/notifications', {
-            templateUrl: 'notifications/notif.html'
-        })
-        .when('/skills', {
-            templateUrl: 'skills/skills.html'
-        });
+})
+.config(function($stateProvider){
+    $stateProvider
+    .state('dashboard', {
+        url: "/dashboard",
+        component:  'dashboard'
+    })
+    .state('skills', {
+        url: '/skills',
+        component: 'skills'
+    });
 });
