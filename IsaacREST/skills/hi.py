@@ -1,6 +1,9 @@
 from flask_restful import Resource, Api
 
-NAME='Hello World'
+# name(id) of the skill, it must be unique and one word
+NAME='Hello'
+# optional description of the skill
+DESCRIPTION=''
 ENABLED=True
 URL='/hi'
 
