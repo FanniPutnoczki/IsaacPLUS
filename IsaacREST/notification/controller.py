@@ -1,15 +1,15 @@
 from flask import Blueprint
 import connection
-import json
+from flask import jsonify
 
 notifs = connection.mongo.isaac.notifications
 
 notif_api = Blueprint('notif_api', __name__)
 
-@notif_api.route('/add')
-def add(notif):
-    notifs.insert_one(notif)
-    return {"he": "he"}
+@notif_api.route('/add', methods=['POST'])
+# def add():
+#     notifs.insert_one(notif)
+#     return {"he": "he"}
 
 @notif_api.route('/add')
 def addOne():
@@ -21,7 +21,9 @@ def addOne():
         "task": "hi",
         "days": [True, True, False, False, False, True, True]
         }
-    notifs.insert_one(notif)
+    id = notifs.insert(notif)
+    print('id: ' + str(id))
+    return jsonify()
 
 @notif_api.route('/remove')
 def remove():
@@ -35,6 +37,7 @@ def getOne(id):
 def getAll():
     ns = []
     for n in notifs.find():
+        print(n)
         pretty = {
             "id": n['_id'],
             "date": n['date'],
@@ -45,5 +48,5 @@ def getAll():
             "days": n['days']
         }
         ns.append(pretty)
-    print(json.dumps(ns))
-    return json.dumps(ns)
+    print(jsonify(ns))
+    return jsonify(ns)
