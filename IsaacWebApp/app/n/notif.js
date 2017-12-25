@@ -18,7 +18,8 @@ angular.module('notifications', [
 
 .component('newNotification', {
     templateUrl: 'n/newNotif.html',
-    controller: NewNotificationController
+    controller: NewNotificationController,
+    controllerAs: 'vm'
 })
 
 .component('notificatoinsOverview', {
@@ -26,7 +27,35 @@ angular.module('notifications', [
     controller: NotificationsOverviewController
 })
 
-function NewNotificationController(){
+function NewNotificationController($scope){
+    var vm = this;
+    vm.submit = submit;
+
+    function submit() {
+        
+        var notif = {}
+        if ($scope.notif.recurring) {
+            notif = {
+                "date": null,
+                "time": $scope.notif.time,
+                "enabled": true,
+                "message": $scope.notif.message,
+                "task": $scope.notif.task,
+                "days": $scope.notif.days,
+            }
+        } else {
+            notif = {
+                "date": $scope.notif.date,
+                "time": $scope.notif.time,
+                "enabled": true,
+                "message": $scope.notif.message,
+                "task": $scope.notif.task,
+                "days": null,
+            }
+        }
+        $.post(config.host + '/api/notifications/add', notif, function(){}, 'json');
+        alert('submitted');
+    }
 
 }
 
