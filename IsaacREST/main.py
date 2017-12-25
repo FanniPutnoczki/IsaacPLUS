@@ -4,6 +4,10 @@ from flask_restful import Resource, Api
 import skills.hi
 from notification.controller import notif_api
 from skills.controller import skills_api
+import logging
+import settings
+
+logging.basicConfig(level=settings.LOG_LEVEL)
 
 app = Flask(__name__)
 
