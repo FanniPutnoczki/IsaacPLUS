@@ -10,6 +10,7 @@ notifs = connection.mongo.isaac.notifications
 
 notif_api = Blueprint('notif_api', __name__)
 
+#WORKS
 @notif_api.route('/add', methods=['POST'])
 def add():
     notif = {
@@ -31,6 +32,7 @@ def remove():
     notifs.delete_one({'_id': id})
     return dumps({})
 
+#WORKS
 @notif_api.route('/get', methods=['GET'])
 def getAll():
     ns = []
