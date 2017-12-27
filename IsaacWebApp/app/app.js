@@ -1,7 +1,8 @@
 app = angular.module("App", [
     'ui.router',
     'ngMaterial',
-    'notifications'
+    'notifications',
+    'skills'
 ])
 .controller('mainController', function($scope){
     $scope.hi = "Hello World";
@@ -11,9 +12,5 @@ app = angular.module("App", [
     .state('dashboard', {
         url: "/dashboard",
         component:  'dashboard'
-    })
-    .state('skills', {
-        url: '/skills',
-        component: 'skills'
     });
 });

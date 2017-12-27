@@ -7,7 +7,12 @@ angular.module('notifications', [
     $stateProvider
     .state('notificationsOverview', {
         url: '/notifications',
-        component: 'notificatoinsOverview'
+        component: 'notificatoinsOverview',
+        resolve: {
+            notifications: function(){
+                alert('resolving');
+            }
+        }
     })
     .state('newNotification', {
         url: '/notifications/new',
@@ -24,8 +29,33 @@ angular.module('notifications', [
 
 .component('notificatoinsOverview', {
     templateUrl: 'n/notifOverview.html',
-    controller: NotificationsOverviewController
+    controller: NotificationsOverviewController,
+    controllerAs: 'vm',
+    bindings: {
+        notifications: '<'
+    }
 })
+
+.service('notificationsService', function(){
+    return {
+        'add': add,
+        'get': get,
+        'remove': remove
+    }
+
+    function remove(name){
+        $.get(config.host + '/api/notifications/remove/'+name);
+    }
+
+    function get(){
+        return $.get(config.host + '/api/notifications/get');
+    }
+
+    function add(notif){
+        $.post(config.host + '/api/notifications/add', notif, function(){}, 'json');
+    }
+
+});
 
 function NewNotificationController($scope){
     var vm = this;
@@ -59,6 +89,15 @@ function NewNotificationController($scope){
 
 }
 
-function NotificationsOverviewController(){
+function NotificationsOverviewController($interval, $scope, notificationsService){
 
+    //$scope.notifs = 
+
+    this.$onInit = function() {
+        //$scope.notifs = notificationsService.get()
+    };
+
+    $interval(function () {
+        //alert('updating');
+    }, 3000);
 }
