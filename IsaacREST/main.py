@@ -6,7 +6,7 @@ from notification.controller import notif_api
 from skills.controller import skills_api
 import logging
 import settings
-import skills.controller
+import skills.service
 
 logging.basicConfig(level=settings.LOG_LEVEL)
 
@@ -19,6 +19,8 @@ api = Api(app)
 app.register_blueprint(notif_api, url_prefix='/api/notifications')
 app.register_blueprint(skills_api, url_prefix='/api/skills')
 
+
+skills.service.insertSkills()
 
 if __name__ == '__main__':
     app.run(debug=True, host= settings.HOST, port=settings.PORT)

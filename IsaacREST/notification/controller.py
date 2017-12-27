@@ -1,8 +1,7 @@
-from flask import Blueprint
-import connection
+from flask import Blueprint, request
+import connection, logging
 from bson.json_util import loads, dumps
-from flask import request
-import logging
+from bson.objectid import ObjectId
 
 logger = logging.getLogger(__name__)
 
@@ -10,7 +9,6 @@ notifs = connection.mongo.isaac.notifications
 
 notif_api = Blueprint('notif_api', __name__)
 
-#WORKS
 @notif_api.route('/add', methods=['POST'])
 def add():
     notif = {
@@ -26,13 +24,12 @@ def add():
     logger.warning('inserted notif') 
     return dumps({})
 
-@notif_api.route('/remove', methods=['POST'])
-def remove():
-    id = request.json['id']
-    notifs.delete_one({'_id': id})
+@notif_api.route('/remove/<id>', methods=['GET'])
+def remove(id):
+    notifs.delete_one({'_id': ObjectId(id)})
     return dumps({})
 
-#WORKS
+
 @notif_api.route('/get', methods=['GET'])
 def getAll():
     ns = []

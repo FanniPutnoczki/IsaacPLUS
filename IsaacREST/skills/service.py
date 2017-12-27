@@ -1,7 +1,10 @@
 import os, pkgutil, settings, logging
 import connection
+from bson.json_util import dumps
 
 skills = connection.mongo.isaac.skills
+
+logger = logging.getLogger()
 
 def collectSkills():
     skills = []
@@ -17,14 +20,31 @@ def collectSkills():
 
 #checks if skill is enabled
 def isEnabled(name):
-    skill = skills.find({'name': name })
-    return skill.enabled
+    skill = skills.find_one({'name': name })
+    logger.info('skill: ' + dumps(skill))
+    return skill['enabled']
 
 #called on start. inserts new skills into database
 def insertSkills():
     for skill in collectSkills():
-        pass
+        if not bool(skills.find_one({'name': skill.NAME })):
+            logger.info('registering new skill: ' + skill.NAME)
+            skills.insert({
+                'name': skill.NAME,
+                'enabled': True,
+                'url': "http://" + settings.HOST + ":" + str(settings.PORT) + "/skills/do" + skill.URL
+                })
+
 
 #disables/enables skill
 def enable(name):
-    pass
+    skill = skills.find_one({'name': name })
+    #if the skill exists
+    if bool(skill):
+        skills.update_one({
+            'name': name
+            }, {
+            '$set': {
+                'enabled': not skill['enabled']
+                }
+            })
