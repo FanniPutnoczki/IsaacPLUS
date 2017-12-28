@@ -22,7 +22,7 @@ angular.module('skills', [
     };
 
     function get(){
-        return "haha"
+        return "haha";
     }
 
     function enable(name){
