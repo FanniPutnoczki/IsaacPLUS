@@ -8,5 +8,5 @@ Intelligent home automation project based on my older Isaac assistant. This is g
 * Dashboard accessible from the browser
 * Easy to add new skills
 * REST based
-
+* Voice Controlled
 
