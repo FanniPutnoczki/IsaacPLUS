@@ -8,11 +8,6 @@ angular.module('notifications', [
     .state('notificationsOverview', {
         url: '/notifications',
         component: 'notificatoinsOverview',
-        resolve: {
-            notifications: function(){
-                alert('resolving');
-            }
-        }
     })
     .state('newNotification', {
         url: '/notifications/new',
@@ -31,9 +26,6 @@ angular.module('notifications', [
     templateUrl: 'n/notifOverview.html',
     controller: NotificationsOverviewController,
     controllerAs: 'vm',
-    bindings: {
-        notifications: '<'
-    }
 })
 
 .service('notificationsService', function(){
@@ -91,13 +83,19 @@ function NewNotificationController($scope){
 
 function NotificationsOverviewController($interval, $scope, notificationsService){
 
-    //$scope.notifs = 
+    var vm = this;
 
-    this.$onInit = function() {
-        //$scope.notifs = notificationsService.get()
+    vm.$onInit = getNotifs;
+    
+    function getNotifs() {
+        notificationsService.get().done(function(notifs){
+            $scope.notifs = JSON.parse(notifs);
+            $scope.$apply();
+        });
     };
 
-    $interval(function () {
-        //alert('updating');
-    }, 3000);
+    //$interval(function () {
+    //    getNotifs();
+    //}, 3000);
+
 }

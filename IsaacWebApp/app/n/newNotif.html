@@ -16,22 +16,23 @@
 
                 <md-input-container ng-show="notif.recurring" class="md-block">
                     <div class="demo-select-all-checkboxes" flex="100" ng-repeat="item in ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']">
-                        <md-checkbox>
+                        <md-checkbox ng-model="notif.day" ng-change="notif.days[$index] = notif.day">
                             {{ item }}
+                            {{notif.days[$index]}}
                         </md-checkbox>
                     </div>
                 </md-input-container>
 
                 <md-input-container ng-show="!notif.recurring" class="md-block">
                     <label>Date</label>
-                    <md-datepicker ng-model="ctrl.myDate" md-placeholder="Enter date"></md-datepicker>
+                    <md-datepicker ng-model="notif.date" md-placeholder="Enter date"></md-datepicker>
                 </md-input-container>
 
                 <md-input-container class="md-block" flex-gt-sm>
                     <label>Task</label>
-                    <md-select ng-model="user.state">
-                        <md-option ng-repeat="state in states" value="{{state.abbrev}}">
-                            {{state.abbrev}}
+                    <md-select ng-model="notif.skill">
+                        <md-option ng-repeat="skill in skills" value="skill.name">
+                            {{skill.name}}
                         </md-option>
                     </md-select>
                 </md-input-container>

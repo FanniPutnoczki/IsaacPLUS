@@ -27,7 +27,7 @@ def getAll():
     for skill in service.collectSkills():
         skills.append({
                 "name": skill.NAME,
-                "url": "http://" + settings.HOST + ":" + str(settings.PORT) + "/skills/do/" + skill.URL,
+                "url": "http://" + settings.HOST + ":" + str(settings.PORT) + "/api/skills/do/" + skill.NAME,
                 "enabled": service.isEnabled(skill.NAME)
             })
     return dumps(skills)

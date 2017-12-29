@@ -12,8 +12,7 @@ def collectSkills():
     logger.info("collecting skills from: " + path)
     for finder, modname, ispkg in pkgutil.walk_packages([path]):
         skill = finder.find_module(modname).load_module(modname)
-        if (hasattr(skill, 'NAME')
-            and hasattr(skill, 'URL')):
+        if (hasattr(skill, 'NAME')):
                 logger.info("skill found: " + getattr(skill, 'NAME'))
                 skills.append(skill)
     return skills
@@ -32,8 +31,17 @@ def insertSkills():
             skills.insert({
                 'name': skill.NAME,
                 'enabled': True,
-                'url': "http://" + settings.HOST + ":" + str(settings.PORT) + "/skills/do" + skill.URL
+                'url': "http://" + settings.HOST + ":" + str(settings.PORT) + "/api/skills/do/" + skill.NAME
                 })
+        else:
+            #refreshing URL
+            skills.update_one({
+            'name': skill.NAME
+            }, {
+            '$set': {
+                'url': "http://" + settings.HOST + ":" + str(settings.PORT) + "/api/skills/do/" + skill.NAME
+                }
+            })
 
 
 #disables/enables skill

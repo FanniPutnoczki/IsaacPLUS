@@ -1,21 +1,23 @@
 <md-content>
-    <md-list>
-      <md-list-item class="md-3-line" ng-repeat="notif in vm.notifications">
-        <div class="md-list-item-text">
-          <h3>{{item.what}}</h3>
-          <h4>{{item.who}}</h4>
-          <p>{{item.notes}}</p>
-        </div>
-        <md-button class="md-secondary">Respond</md-button>
-        <md-divider ng-if="!$last"></md-divider>
-      </md-list-item>
-    </md-list>
 
     <section layout="row" layout-sm="column" layout-align="left left" layout-wrap>
-        <md-button class="md-fab" aria-label="Eat cake" ng-href='#!/notifications/new'>
+        <md-button class="md-fab" aria-label="New Notification" ng-href='#!/notifications/new'>
             <md-icon md-svg-src="img/icons/add.svg"></md-icon>
         </md-button>
     </section>
+
+    <md-list>
+      <md-list-item class="md-3-line" ng-repeat="notif in notifs">
+          <md-checkbox ng-model="notif.enabled" ng-change='vm.enable(notif)'></md-checkbox>
+        <div class="md-list-item-text">
+          <h3>{{notif}}</h3>
+          <h4>sdfsdf</h4>
+          <p>sdfsdf</p>
+        </div>
+        <md-button class="md-secondary">Delete</md-button>
+        <md-divider ng-if="!$last"></md-divider>
+      </md-list-item>
+    </md-list>
 
   </md-content>
 

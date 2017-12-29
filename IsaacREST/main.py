@@ -1,12 +1,11 @@
-from flask import Flask
-from flask import Blueprint
+from flask import Flask, Blueprint
 from flask_restful import Resource, Api
 import skills.hi
 from notification.controller import notif_api
 from skills.controller import skills_api
-import logging
-import settings
+import logging, settings
 import skills.service
+from flask_cors import CORS, cross_origin
 
 logging.basicConfig(level=settings.LOG_LEVEL)
 
@@ -14,6 +13,7 @@ app = Flask(__name__)
 
 # config
 api = Api(app)
+cors = CORS(app)
 
 # blueprints
 app.register_blueprint(notif_api, url_prefix='/api/notifications')

@@ -22,17 +22,33 @@ angular.module('skills', [
     };
 
     function get(){
-        return "haha";
+        return $.get(config.host+"/api/skills/get");
     }
 
     function enable(name){
-
+        $.get(config.host+"/api/skills/enable/" + name);
     }
 
 });
 
 function SkillsController(skillsService, $scope){
-    this.$onInit = function() {
-        $scope.skills = skillsService.get();
+
+    var vm = this;
+
+    vm.$onInit = getSkills;
+    vm.switchSkills = switchSkills;
+
+    function getSkills() {
+        skillsService.get().done(function(skills){
+            $scope.skills = JSON.parse(skills);
+            console.log(skills);
+            $scope.$apply();
+            $scope.$digest();
+        });
     };
+
+    function switchSkills(name){
+        skillsService.enable(name);
+    }
+
 }
