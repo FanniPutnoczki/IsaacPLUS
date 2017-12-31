@@ -1,8 +1,9 @@
 1. Download the Raspbian Jessie image and set up your Raspberry (unfortunately the configuration is different for the newer images, but Jessie is still a great version to use)
 
-2. Set up your Raspberry as a wireless access point: 
+2. Configure your Raspberry as a file server so you will be able to share files from all the other computers on your network. You can do it by installing Samba
 
-3. Configure your Rapberry as a media center
+3. Set up your Raspberry as a wireless access point: 
+I recommend you the official tutorial: https://www.raspberrypi.org/documentation/configuration/wireless/access-point.md
 
 4. Install MongoDB
 
