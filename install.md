@@ -5,11 +5,21 @@
 3. Set up your Raspberry as a wireless access point: 
 I recommend you the official tutorial: https://www.raspberrypi.org/documentation/configuration/wireless/access-point.md
 
-4. Install MongoDB
+4. Install the packages required by Isaac
 
-5. Setting up IsaacPLUS
+sudo pip install pymongo
+sudo pip install flask_cors
 
-	1. Install dependencies
+
+5. Start up Isaac
+
+python notification_listener.py
+python main.py
+	
+	
+	
+	
+	
 	
 #first steps
 2. Install git: sudo apt-get install git
@@ -18,3 +28,4 @@ I recommend you the official tutorial: https://www.raspberrypi.org/documentation
 sudo pip install flask-restful
 5. install mongodb then install the python mongo module
 pip install flask-pymongo
+
