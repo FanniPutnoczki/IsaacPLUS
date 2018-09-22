@@ -12,8 +12,8 @@ def do(name):
     for skill in service.collectSkills():
         if ((skill.NAME == name)
             and (service.isEnabled(name))):
-            skill.do()
-    return dumps(name)
+            answer = skill.do()
+    return dumps(answer)
 
 @skills_api.route('/enable/<name>', methods=['GET'])
 def enable(name):

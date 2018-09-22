@@ -1,0 +1,4 @@
+#Sun Sep 23 01:49:06 EEST 2018
+base.0=/home/fox/Git/IsaacPLUS/IsaacApp/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0
+path.0=classes.dex
+renamed.0=classes.dex

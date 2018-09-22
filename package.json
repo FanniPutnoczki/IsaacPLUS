@@ -1,0 +1,11 @@
+{
+	"nativescript": {
+		"id": "org.nativescript.IsaacPLUS",
+		"tns-android": {
+			"version": "4.3.0-2018-08-10-09"
+		}
+	},
+	"dependencies": {
+		"tns-core-modules": "4.3.0-2018-08-08-02"
+	}
+}

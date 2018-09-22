@@ -1,0 +1,1 @@
+/home/fox/Git/IsaacPLUS/IsaacApp/platforms/android/app/src/main/assets/app
