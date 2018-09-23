@@ -11,6 +11,7 @@ import { NativeScriptFormsModule } from "nativescript-angular/forms";
 // Uncomment and add to NgModule imports  if you need to use the HTTP wrapper
 import { NativeScriptHttpModule } from "nativescript-angular/http";
 import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
     bootstrap: [],
@@ -19,7 +20,8 @@ import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
         NativeScriptFormsModule,
         NativeScriptHttpModule,
         NativeScriptHttpClientModule,
-        NativeScriptRouterModule.forRoot(skillRoutes)
+        NativeScriptRouterModule.forRoot(skillRoutes),
+        SharedModule
     ],
     declarations: [
         SkillsComponent

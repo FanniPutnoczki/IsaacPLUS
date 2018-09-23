@@ -9,16 +9,31 @@ export class SkillsService {
     constructor(private http: HttpClient) { }
 
     getSkills(): Skill[] {
-        let url = "http://10.0.2.2:5000/api/skills/do/Hi";
+        /*let url = "http://10.0.2.2:5000/api/skills/do/Hi";
         console.log(url),
         
         this.http.get(url, {})
             .subscribe((result) => {
                 console.log(result);
+                console.log("result");
             }, (error) => {
+                console.log("error");
                 console.log(error);
             });
-        return [];
+        return [];*/
+        let skills: Skill[] = [
+            {
+                name: "Hello",
+                url: "...",
+                enabled: true
+            },
+            {
+                name: "Lamp",
+                url: "...",
+                enabled: true
+            }
+        ]
+        return skills;
     }
 
     runSkill(skill: Skill) {
