@@ -12,8 +12,16 @@ refer to http://docs.nativescript.org/ui/theme.
 @import '~nativescript-theme-core/css/core.light.css';
 @import './custom.css';
 
+.img-round {
+	background-color: #4a86e8;
+	border-radius: 50;
+	padding: 10;
+	margin-right: 15;
+}
+
 .box {
-	margin: 10;
+	margin: 8,15;
+	padding: 12;
 	background-color: white;
-	/*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
+	/*box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.5);*/
 }

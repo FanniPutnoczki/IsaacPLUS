@@ -9,7 +9,7 @@ background-color: #11c1f3;
 }
 
 .page {
-background-color: #e6e6e6;
+background-color: #eeeeee;
 }
 
 .tab-view {
@@ -21,7 +21,7 @@ background-color: #e6e6e6;
 }
 
 .page label, .tab-view label {
-color: #000000;
+color: #434343;
 }
 
 .segmented-bar {
@@ -37,7 +37,7 @@ background-color: #d9d9d9;
 }
 
 .switch[checked=true] {
-color: #ffffff;
+color: #4a86e8;
 }
 
 .switch[checked=true] {
@@ -105,7 +105,7 @@ font-size: 12;
 }
 
 .page label.text-primary, .tab-view label.text-primary {
-color: #30bcff;
+color: #434343;
 }
 
 .page label.bg-primary, .tab-view label.bg-primary {
@@ -217,7 +217,7 @@ background-color: #d9d9d9;
 }
 
 .sidedrawer-list-item {
-color: #000000;
+color: #434343;
 }
 
 .sidedrawer-list-item.active {
@@ -225,5 +225,5 @@ background-color: #d9d9d9;
 }
 
 .sidedrawer-list-item.active {
-color: #000000;
+color: #434343;
 }

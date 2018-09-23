@@ -25,7 +25,7 @@ export class SkillsService {
             {
                 name: "Hello",
                 url: "...",
-                enabled: true
+                enabled: false
             },
             {
                 name: "Lamp",

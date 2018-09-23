@@ -20,7 +20,7 @@ export class SkillsComponent {
 	}
 
 	onSkillEnabled(event, skill) {
-		skill.enabled = !skill.enabled;
+		console.log("checked");
 	}
 
 }
