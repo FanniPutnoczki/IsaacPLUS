@@ -1,8 +1,22 @@
 import { Component, OnInit, Input } from "@angular/core";
+import { RouterExtensions } from "nativescript-angular/router";
 
 @Component({
     selector: "action-bar",
     moduleId: module.id,
-    template: "<ActionBar title='Isaac' class='action-bar'></ActionBar>"
+    templateUrl: "./action.bar.component.html"
 })
-export class ActionBarComponent { }
+export class ActionBarComponent {
+
+	constructor(private routerExtensions: RouterExtensions) {}
+
+	settings() {
+		this.routerExtensions.navigate(["/settings"], {
+	        transition: {
+		        name: "slideLeft",
+		        duration: 500,
+		        curve: "linear"
+		    }
+		});
+	}
+}

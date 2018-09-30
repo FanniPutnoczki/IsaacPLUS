@@ -12,7 +12,7 @@ export class HttpService {
         ) { }
 
     get(url: string) {
-        let fullUrl = "http://" + this.configService.getHost() + ":" + this.configService.getPort() + "/api/" + url;
+        let fullUrl = this.configService.getDomain() + "/api/" + url;
         console.log(fullUrl);
         return this.http.get(fullUrl, this.getHeaders());
     }

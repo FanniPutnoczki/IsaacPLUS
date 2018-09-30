@@ -2,6 +2,7 @@ import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 import { NativeScriptHttpModule } from "nativescript-angular/http";
 import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
+import { NativeScriptRouterModule } from "nativescript-angular/router";
 
 import { HttpService } from "./http.service";
 import { ConfigService } from "./config.service";
@@ -14,7 +15,8 @@ import { NativeScriptFormsModule } from "nativescript-angular/forms";
         NativeScriptModule,
         NativeScriptHttpModule,
         NativeScriptHttpClientModule,
-        NativeScriptFormsModule
+        NativeScriptFormsModule,
+        NativeScriptRouterModule
     ],
     declarations: [
         ActionBarComponent
@@ -24,6 +26,7 @@ import { NativeScriptFormsModule } from "nativescript-angular/forms";
         ConfigService
     ],
     exports: [
+        NativeScriptRouterModule,
         ActionBarComponent
     ]
 })
