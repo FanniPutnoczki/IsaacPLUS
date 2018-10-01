@@ -6,3 +6,6 @@ LOG_LEVEL=logging.DEBUG
 
 HOST = '0.0.0.0'
 PORT = 5000
+
+USERNAME = "changeit"
+PASSWORD = "changeit"

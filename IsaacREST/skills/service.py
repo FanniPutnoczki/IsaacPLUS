@@ -31,7 +31,7 @@ def insertSkills():
             skills.insert({
                 'name': skill.NAME,
                 'enabled': True,
-                'url': "http://" + settings.HOST + ":" + str(settings.PORT) + "/api/skills/do/" + skill.NAME
+                'url': "/skills/do/" + skill.NAME
                 })
         else:
             #refreshing URL
@@ -39,7 +39,7 @@ def insertSkills():
             'name': skill.NAME
             }, {
             '$set': {
-                'url': "http://" + settings.HOST + ":" + str(settings.PORT) + "/api/skills/do/" + skill.NAME
+                'url': "/skills/do/" + skill.NAME
                 }
             })
 
@@ -53,6 +53,19 @@ def enable(name):
             'name': name
             }, {
             '$set': {
-                'enabled': not skill['enabled']
+                'enabled': True
+                }
+            })
+
+#disables/enables skill
+def disable(name):
+    skill = skills.find_one({'name': name })
+    #if the skill exists
+    if bool(skill):
+        skills.update_one({
+            'name': name
+            }, {
+            '$set': {
+                'enabled': False
                 }
             })

@@ -15,28 +15,34 @@ export class ConfigService {
     
 
     constructor() {
-        this.storage = new SecureStorage();
+        //this.storage = new SecureStorage();
     }
 
     getDomain() {
-
-        return new Promise((resolve, reject) => {
+        //TODO do not mock
+        return getString(this.DOMAIN_KEY);
+        //return "http://192.168.0.161:5000";
+/*        return new Promise((resolve, reject) => {
             this.storage.get({
                 key: this.DOMAIN_KEY
-            }).then( value => {
+            })
+            .then( value => {
                     if(value) {
                         //TODO not mocking data but return value
                         resolve("http://10.0.2.2:5000");
                     } else {
-                        reject();
+                        resolve('');
                     }
+                }, error => {
+                    resolve('');
                 }
             );
-        });
+        });*/
     }
 
     setDomain(domain: string) {
-        return new Promise((resolve,reject) => {
+        setString(this.DOMAIN_KEY, domain ? domain : '');
+/*        return new Promise((resolve,reject) => {
             this.storage.set({
                 key: this.DOMAIN_KEY,
                 value: domain
@@ -50,11 +56,12 @@ export class ConfigService {
                 }
             );
 
-        });
+        });*/
     }
 
     getPassword() {
-        return new Promise((resolve, reject) => {
+        getString(this.PASSWORD_KEY);
+/*        return new Promise((resolve, reject) => {
             this.storage.get({
                 key: this.PASSWORD_KEY
             }).then(
@@ -66,11 +73,12 @@ export class ConfigService {
                     }
                 }
             );
-        });
+        });*/
     }
 
     setPassword(password: string) {
-        return new Promise((resolve,reject) => {
+        setString(this.PASSWORD_KEY, password ? password : '');
+/*        return new Promise((resolve,reject) => {
             this.storage.set({
                 key: this.PASSWORD_KEY,
                 value: password
@@ -84,7 +92,7 @@ export class ConfigService {
                     }
                 }
             );
-        });
+        });*/
     }
 
 }

@@ -18,19 +18,15 @@ export class SettingsComponent {
 	) {
 		this.loadMask = true;
 		this.ui = {
-			domain: '',
-			password: ''
+			domain: this.configService.getDomain(),
+			password: this.configService.getPassword()
 		};
-		this.configService.getDomain().then(d => { this.ui.domain = d });
-		this.configService.getPassword().then(p => { this.ui.password = p });
 	}
 
 	ok() {
-		this.configService.setDomain(this.ui.domain).then(r => {
-			this.configService.setPassword(this.ui.password).then(s => {
-				this.navigate();
-			});
-		});
+		this.configService.setPassword(this.ui.password);
+		this.configService.setDomain(this.ui.domain);
+		this.navigate();
 	}
 
 	navigate() {

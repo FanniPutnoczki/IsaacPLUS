@@ -9,6 +9,7 @@ logger = logging.getLogger()
 
 @skills_api.route('/do/<name>', methods=['GET'])
 def do(name):
+    logger.info('executing ' + name)
     for skill in service.collectSkills():
         if ((skill.NAME == name)
             and (service.isEnabled(name))):
@@ -17,8 +18,14 @@ def do(name):
 
 @skills_api.route('/enable/<name>', methods=['GET'])
 def enable(name):
-    logger.info('enabling/disabling skill: ' + name)
+    logger.info('enabling skill: ' + name)
     service.enable(name)
+    return dumps(name)
+
+@skills_api.route('/disable/<name>', methods=['GET'])
+def disable(name):
+    logger.info('disabling skill: ' + name)
+    service.disable(name)
     return dumps(name)
 
 @skills_api.route('/get', methods=['GET'])
@@ -27,7 +34,7 @@ def getAll():
     for skill in service.collectSkills():
         skills.append({
                 "name": skill.NAME,
-                "url": "http://" + settings.HOST + ":" + str(settings.PORT) + "/api/skills/do/" + skill.NAME,
+                "url": "/skills/do/" + skill.NAME,
                 "enabled": service.isEnabled(skill.NAME)
             })
     return dumps(skills)

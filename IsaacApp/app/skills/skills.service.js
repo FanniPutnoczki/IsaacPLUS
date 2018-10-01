@@ -1,47 +1,44 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var http_1 = require("@angular/common/http");
+var http_service_1 = require("../shared/http.service");
 var SkillsService = /** @class */ (function () {
-    function SkillsService(http) {
-        this.http = http;
+    function SkillsService(httpService) {
+        this.httpService = httpService;
+        this.getSkillsUrl = "skills/get";
+        this.enableSkillUrl = "skills/enable/";
+        this.disableSkillUrl = "skills/disable/";
     }
     SkillsService.prototype.getSkills = function () {
-        /*let url = "http://10.0.2.2:5000/api/skills/do/Hi";
-        console.log(url),
-        
-        this.http.get(url, {})
-            .subscribe((result) => {
-                console.log(result);
-                console.log("result");
-            }, (error) => {
-                console.log("error");
-                console.log(error);
-            });
-        return [];*/
-        var skills = [
-            {
-                name: "Hello",
-                url: "...",
-                enabled: false
-            },
-            {
-                name: "Lamp",
-                url: "...",
-                enabled: true
-            }
-        ];
-        return skills;
+        return this.httpService.get(this.getSkillsUrl);
+        /*        let skills: Skill[] = [
+                    {
+                        name: "Hello",
+                        url: "...",
+                        enabled: false
+                    },
+                    {
+                        name: "Lamp",
+                        url: "...",
+                        enabled: true
+                    }
+                ]
+                return skills;*/
     };
     SkillsService.prototype.runSkill = function (skill) {
+        return this.httpService.get("skills/do/" + skill.name);
     };
     SkillsService.prototype.enableSkill = function (skill) {
+        return this.httpService.get(this.enableSkillUrl + skill.name);
+    };
+    SkillsService.prototype.disableSkill = function (skill) {
+        return this.httpService.get(this.disableSkillUrl + skill.name);
     };
     SkillsService = __decorate([
         core_1.Injectable(),
-        __metadata("design:paramtypes", [http_1.HttpClient])
+        __metadata("design:paramtypes", [http_service_1.HttpService])
     ], SkillsService);
     return SkillsService;
 }());
 exports.SkillsService = SkillsService;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2tpbGxzLnNlcnZpY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJza2lsbHMuc2VydmljZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLHNDQUEyQztBQUMzQyw2Q0FBK0Q7QUFLL0Q7SUFFSSx1QkFBb0IsSUFBZ0I7UUFBaEIsU0FBSSxHQUFKLElBQUksQ0FBWTtJQUFJLENBQUM7SUFFekMsaUNBQVMsR0FBVDtRQUNJOzs7Ozs7Ozs7OztvQkFXWTtRQUNaLElBQUksTUFBTSxHQUFZO1lBQ2xCO2dCQUNJLElBQUksRUFBRSxPQUFPO2dCQUNiLEdBQUcsRUFBRSxLQUFLO2dCQUNWLE9BQU8sRUFBRSxLQUFLO2FBQ2pCO1lBQ0Q7Z0JBQ0ksSUFBSSxFQUFFLE1BQU07Z0JBQ1osR0FBRyxFQUFFLEtBQUs7Z0JBQ1YsT0FBTyxFQUFFLElBQUk7YUFDaEI7U0FDSixDQUFBO1FBQ0QsTUFBTSxDQUFDLE1BQU0sQ0FBQztJQUNsQixDQUFDO0lBRUQsZ0NBQVEsR0FBUixVQUFTLEtBQVk7SUFFckIsQ0FBQztJQUVELG1DQUFXLEdBQVgsVUFBWSxLQUFZO0lBRXhCLENBQUM7SUF0Q1EsYUFBYTtRQUR6QixpQkFBVSxFQUFFO3lDQUdpQixpQkFBVTtPQUYzQixhQUFhLENBd0N6QjtJQUFELG9CQUFDO0NBQUEsQUF4Q0QsSUF3Q0M7QUF4Q1ksc0NBQWEiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBJbmplY3RhYmxlIH0gZnJvbSBcIkBhbmd1bGFyL2NvcmVcIjtcbmltcG9ydCB7IEh0dHBDbGllbnQsIEh0dHBIZWFkZXJzIH0gZnJvbSBcIkBhbmd1bGFyL2NvbW1vbi9odHRwXCI7XG5cbmltcG9ydCB7IFNraWxsIH0gZnJvbSBcIi4vc2tpbGxcIjtcblxuQEluamVjdGFibGUoKVxuZXhwb3J0IGNsYXNzIFNraWxsc1NlcnZpY2Uge1xuXG4gICAgY29uc3RydWN0b3IocHJpdmF0ZSBodHRwOiBIdHRwQ2xpZW50KSB7IH1cblxuICAgIGdldFNraWxscygpOiBTa2lsbFtdIHtcbiAgICAgICAgLypsZXQgdXJsID0gXCJodHRwOi8vMTAuMC4yLjI6NTAwMC9hcGkvc2tpbGxzL2RvL0hpXCI7XG4gICAgICAgIGNvbnNvbGUubG9nKHVybCksXG4gICAgICAgIFxuICAgICAgICB0aGlzLmh0dHAuZ2V0KHVybCwge30pXG4gICAgICAgICAgICAuc3Vic2NyaWJlKChyZXN1bHQpID0+IHtcbiAgICAgICAgICAgICAgICBjb25zb2xlLmxvZyhyZXN1bHQpO1xuICAgICAgICAgICAgICAgIGNvbnNvbGUubG9nKFwicmVzdWx0XCIpO1xuICAgICAgICAgICAgfSwgKGVycm9yKSA9PiB7XG4gICAgICAgICAgICAgICAgY29uc29sZS5sb2coXCJlcnJvclwiKTtcbiAgICAgICAgICAgICAgICBjb25zb2xlLmxvZyhlcnJvcik7XG4gICAgICAgICAgICB9KTtcbiAgICAgICAgcmV0dXJuIFtdOyovXG4gICAgICAgIGxldCBza2lsbHM6IFNraWxsW10gPSBbXG4gICAgICAgICAgICB7XG4gICAgICAgICAgICAgICAgbmFtZTogXCJIZWxsb1wiLFxuICAgICAgICAgICAgICAgIHVybDogXCIuLi5cIixcbiAgICAgICAgICAgICAgICBlbmFibGVkOiBmYWxzZVxuICAgICAgICAgICAgfSxcbiAgICAgICAgICAgIHtcbiAgICAgICAgICAgICAgICBuYW1lOiBcIkxhbXBcIixcbiAgICAgICAgICAgICAgICB1cmw6IFwiLi4uXCIsXG4gICAgICAgICAgICAgICAgZW5hYmxlZDogdHJ1ZVxuICAgICAgICAgICAgfVxuICAgICAgICBdXG4gICAgICAgIHJldHVybiBza2lsbHM7XG4gICAgfVxuXG4gICAgcnVuU2tpbGwoc2tpbGw6IFNraWxsKSB7XG5cbiAgICB9XG5cbiAgICBlbmFibGVTa2lsbChza2lsbDogU2tpbGwpIHtcblxuICAgIH1cblxufVxuIl19
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2tpbGxzLnNlcnZpY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJza2lsbHMuc2VydmljZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLHNDQUEyQztBQUMzQyx1REFBcUQ7QUFLckQ7SUFNSSx1QkFBb0IsV0FBd0I7UUFBeEIsZ0JBQVcsR0FBWCxXQUFXLENBQWE7UUFKcEMsaUJBQVksR0FBVyxZQUFZLENBQUM7UUFDcEMsbUJBQWMsR0FBVyxnQkFBZ0IsQ0FBQztRQUMxQyxvQkFBZSxHQUFXLGlCQUFpQixDQUFDO0lBRUosQ0FBQztJQUVqRCxpQ0FBUyxHQUFUO1FBRUksTUFBTSxDQUFDLElBQUksQ0FBQyxXQUFXLENBQUMsR0FBRyxDQUFDLElBQUksQ0FBQyxZQUFZLENBQUMsQ0FBQztRQUV2RDs7Ozs7Ozs7Ozs7O2dDQVl3QjtJQUNwQixDQUFDO0lBRUQsZ0NBQVEsR0FBUixVQUFTLEtBQVk7UUFDakIsTUFBTSxDQUFDLElBQUksQ0FBQyxXQUFXLENBQUMsR0FBRyxDQUFDLFlBQVksR0FBRyxLQUFLLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDM0QsQ0FBQztJQUVELG1DQUFXLEdBQVgsVUFBWSxLQUFZO1FBQ3BCLE1BQU0sQ0FBQyxJQUFJLENBQUMsV0FBVyxDQUFDLEdBQUcsQ0FBQyxJQUFJLENBQUMsY0FBYyxHQUFHLEtBQUssQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUNsRSxDQUFDO0lBRUQsb0NBQVksR0FBWixVQUFhLEtBQVk7UUFDckIsTUFBTSxDQUFDLElBQUksQ0FBQyxXQUFXLENBQUMsR0FBRyxDQUFDLElBQUksQ0FBQyxlQUFlLEdBQUcsS0FBSyxDQUFDLElBQUksQ0FBQyxDQUFDO0lBQ25FLENBQUM7SUFyQ1EsYUFBYTtRQUR6QixpQkFBVSxFQUFFO3lDQU93QiwwQkFBVztPQU5uQyxhQUFhLENBdUN6QjtJQUFELG9CQUFDO0NBQUEsQUF2Q0QsSUF1Q0M7QUF2Q1ksc0NBQWEiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBJbmplY3RhYmxlIH0gZnJvbSBcIkBhbmd1bGFyL2NvcmVcIjtcbmltcG9ydCB7IEh0dHBTZXJ2aWNlIH0gZnJvbSBcIi4uL3NoYXJlZC9odHRwLnNlcnZpY2VcIjtcblxuaW1wb3J0IHsgU2tpbGwgfSBmcm9tIFwiLi9za2lsbFwiO1xuXG5ASW5qZWN0YWJsZSgpXG5leHBvcnQgY2xhc3MgU2tpbGxzU2VydmljZSB7XG5cbiAgICBwcml2YXRlIGdldFNraWxsc1VybDogc3RyaW5nID0gXCJza2lsbHMvZ2V0XCI7XG4gICAgcHJpdmF0ZSBlbmFibGVTa2lsbFVybDogc3RyaW5nID0gXCJza2lsbHMvZW5hYmxlL1wiO1xuICAgIHByaXZhdGUgZGlzYWJsZVNraWxsVXJsOiBzdHJpbmcgPSBcInNraWxscy9kaXNhYmxlL1wiO1xuXG4gICAgY29uc3RydWN0b3IocHJpdmF0ZSBodHRwU2VydmljZTogSHR0cFNlcnZpY2UpIHsgfVxuXG4gICAgZ2V0U2tpbGxzKCl7XG5cbiAgICAgICAgcmV0dXJuIHRoaXMuaHR0cFNlcnZpY2UuZ2V0KHRoaXMuZ2V0U2tpbGxzVXJsKTtcblxuLyogICAgICAgIGxldCBza2lsbHM6IFNraWxsW10gPSBbXG4gICAgICAgICAgICB7XG4gICAgICAgICAgICAgICAgbmFtZTogXCJIZWxsb1wiLFxuICAgICAgICAgICAgICAgIHVybDogXCIuLi5cIixcbiAgICAgICAgICAgICAgICBlbmFibGVkOiBmYWxzZVxuICAgICAgICAgICAgfSxcbiAgICAgICAgICAgIHtcbiAgICAgICAgICAgICAgICBuYW1lOiBcIkxhbXBcIixcbiAgICAgICAgICAgICAgICB1cmw6IFwiLi4uXCIsXG4gICAgICAgICAgICAgICAgZW5hYmxlZDogdHJ1ZVxuICAgICAgICAgICAgfVxuICAgICAgICBdXG4gICAgICAgIHJldHVybiBza2lsbHM7Ki9cbiAgICB9XG5cbiAgICBydW5Ta2lsbChza2lsbDogU2tpbGwpIHtcbiAgICAgICAgcmV0dXJuIHRoaXMuaHR0cFNlcnZpY2UuZ2V0KFwic2tpbGxzL2RvL1wiICsgc2tpbGwubmFtZSk7XG4gICAgfVxuXG4gICAgZW5hYmxlU2tpbGwoc2tpbGw6IFNraWxsKSB7XG4gICAgICAgIHJldHVybiB0aGlzLmh0dHBTZXJ2aWNlLmdldCh0aGlzLmVuYWJsZVNraWxsVXJsICsgc2tpbGwubmFtZSk7XG4gICAgfVxuXG4gICAgZGlzYWJsZVNraWxsKHNraWxsOiBTa2lsbCkge1xuICAgICAgICByZXR1cm4gdGhpcy5odHRwU2VydmljZS5nZXQodGhpcy5kaXNhYmxlU2tpbGxVcmwgKyBza2lsbC5uYW1lKTtcbiAgICB9XG5cbn1cbiJdfQ==

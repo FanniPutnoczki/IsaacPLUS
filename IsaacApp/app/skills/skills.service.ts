@@ -1,27 +1,22 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpService } from "../shared/http.service";
 
 import { Skill } from "./skill";
 
 @Injectable()
 export class SkillsService {
 
-    constructor(private http: HttpClient) { }
+    private getSkillsUrl: string = "skills/get";
+    private enableSkillUrl: string = "skills/enable/";
+    private disableSkillUrl: string = "skills/disable/";
 
-    getSkills(): Skill[] {
-        /*let url = "http://10.0.2.2:5000/api/skills/do/Hi";
-        console.log(url),
-        
-        this.http.get(url, {})
-            .subscribe((result) => {
-                console.log(result);
-                console.log("result");
-            }, (error) => {
-                console.log("error");
-                console.log(error);
-            });
-        return [];*/
-        let skills: Skill[] = [
+    constructor(private httpService: HttpService) { }
+
+    getSkills(){
+
+        return this.httpService.get(this.getSkillsUrl);
+
+/*        let skills: Skill[] = [
             {
                 name: "Hello",
                 url: "...",
@@ -33,15 +28,19 @@ export class SkillsService {
                 enabled: true
             }
         ]
-        return skills;
+        return skills;*/
     }
 
     runSkill(skill: Skill) {
-
+        return this.httpService.get("skills/do/" + skill.name);
     }
 
     enableSkill(skill: Skill) {
+        return this.httpService.get(this.enableSkillUrl + skill.name);
+    }
 
+    disableSkill(skill: Skill) {
+        return this.httpService.get(this.disableSkillUrl + skill.name);
     }
 
 }

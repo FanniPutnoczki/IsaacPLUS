@@ -6,6 +6,7 @@ from skills.controller import skills_api
 import logging, settings
 import skills.service
 from flask_cors import CORS, cross_origin
+from flask_httpauth import HTTPBasicAuth
 
 logging.basicConfig(level=settings.LOG_LEVEL)
 
@@ -18,7 +19,6 @@ cors = CORS(app)
 # blueprints
 app.register_blueprint(notif_api, url_prefix='/api/notifications')
 app.register_blueprint(skills_api, url_prefix='/api/skills')
-
 
 skills.service.insertSkills()
 
