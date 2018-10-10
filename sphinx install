@@ -1,0 +1,24 @@
+sudo apt-get install autoconf
+sudo apt-get install automake
+sudo apt-get install swig (swig3)
+
+sphinx base folder:
+./autogen.sh
+make
+sudo make install
+
+pocketsphinx folder
+./autogen.sh
+./configure
+make clean all
+make check
+sudo make install
+
+pocketsphynx python module install
+git clone https://github.com/cmusphinx/pocketsphinx-python.git
+python setup.py install
+
+
+for the voice:
+pip install gtts
+sudo apt-get install libttspico-utils

@@ -9,3 +9,6 @@ PORT = 5000
 
 USERNAME = "changeit"
 PASSWORD = "changeit"
+
+#values: gtts or pico, try out both and choose which voice do you prefer.
+VOICE="gtts"

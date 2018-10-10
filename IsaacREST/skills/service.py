@@ -30,18 +30,8 @@ def insertSkills():
             logger.info('registering new skill: ' + skill.NAME)
             skills.insert({
                 'name': skill.NAME,
-                'enabled': True,
-                'url': "/skills/do/" + skill.NAME
+                'enabled': True
                 })
-        else:
-            #refreshing URL
-            skills.update_one({
-            'name': skill.NAME
-            }, {
-            '$set': {
-                'url': "/skills/do/" + skill.NAME
-                }
-            })
 
 
 #disables/enables skill
