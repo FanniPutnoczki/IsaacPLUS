@@ -2,10 +2,10 @@ import { Component } from "@angular/core";
 import { ModalDialogParams } from "nativescript-angular/modal-dialog";
 
 @Component({
-    selector: "routines",
-    templateUrl: "./skills/routines.component.html"
+    selector: "routines-dialog",
+    templateUrl: "./content/routines/routines.dialog.html"
 })
-export class RoutinesComponent {
+export class RoutinesDialog {
 
     constructor() {
         

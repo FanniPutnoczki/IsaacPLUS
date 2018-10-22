@@ -9,14 +9,12 @@ import { RouterExtensions } from "nativescript-angular/router";
 
 export class SettingsComponent { 
 
-	private loadMask;
 	private ui;
 
 	constructor(
 		private configService: ConfigService,
 		private routerExtensions: RouterExtensions
 	) {
-		this.loadMask = true;
 		this.ui = {
 			domain: this.configService.getDomain(),
 			password: this.configService.getPassword()
@@ -30,7 +28,7 @@ export class SettingsComponent {
 	}
 
 	navigate() {
-		this.routerExtensions.navigate(["/skills"], {
+		this.routerExtensions.navigate(["/content"], {
 	        transition: {
 		        name: "slideRight",
 		        duration: 500,

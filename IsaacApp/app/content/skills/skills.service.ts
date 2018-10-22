@@ -1,7 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpService } from "../shared/http.service";
-
-import { Skill } from "./skill";
+import { HttpService } from "../../shared/http.service";
 
 @Injectable()
 export class SkillsService {
@@ -31,15 +29,15 @@ export class SkillsService {
         return skills;*/
     }
 
-    runSkill(skill: Skill) {
+    runSkill(skill: any) {
         return this.httpService.get("skills/do/" + skill.name);
     }
 
-    enableSkill(skill: Skill) {
+    enableSkill(skill: any) {
         return this.httpService.get(this.enableSkillUrl + skill.name);
     }
 
-    disableSkill(skill: Skill) {
+    disableSkill(skill: any) {
         return this.httpService.get(this.disableSkillUrl + skill.name);
     }
 

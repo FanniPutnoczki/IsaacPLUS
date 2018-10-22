@@ -1,0 +1,22 @@
+<ActionBar title='Isaac' class='action-bar'>
+	<ActionItem (tap)="refresh()" android.position='actionBar' icon='res://refresh'></ActionItem>
+	<ActionItem (tap)="settings()" android.position='actionBar' icon='res://settings'></ActionItem>
+</ActionBar>
+
+<GridLayout class="page" columns="*" rows="*">
+	<StackLayout col=0 row=0>
+
+		<TabView class="tab-view" id="tabViewContainer">
+		    <StackLayout *tabItem="{title: 'Skills'}">
+		        <skills></skills>
+		    </StackLayout>
+		    <StackLayout *tabItem="{title: 'Streams'}">
+		        <streams></streams>
+		    </StackLayout>
+		    <StackLayout *tabItem="{title: 'Routines'}">
+		        <routines></routines>
+		    </StackLayout>
+		</TabView>
+
+	</StackLayout>
+</GridLayout> 
