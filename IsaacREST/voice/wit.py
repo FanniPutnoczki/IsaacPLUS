@@ -110,3 +110,21 @@ if __name__ == '__main__':
     p.terminate()
     print foo.text
     print "Done."
+
+def get_speech():
+    p = pyaudio.PyAudio()
+    stream = p.open(format=FORMAT, channels=1, rate=RATE,
+                    input=True, output=True,
+                    frames_per_buffer=CHUNK_SIZE)
+
+    headers = {'Authorization': 'Bearer ' + access_key,
+               'Content-Type': 'audio/raw; encoding=signed-integer; bits=16;' +
+               ' rate=8000; endian=little', 'Transfer-Encoding': 'chunked'}
+    url = 'https://api.wit.ai/speech'
+
+    foo = requests.post(url, headers=headers, data=gen(p, stream))
+    stream.stop_stream()
+    stream.close()
+    p.terminate()
+    print foo.text
+    return foo.text

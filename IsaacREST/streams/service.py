@@ -6,6 +6,7 @@ import time
 logger = logging.getLogger()
 
 streamsDict = dict()
+
 def getStreams():
 	streams = []
 	path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'scripts')
@@ -18,10 +19,6 @@ def getStreams():
 	return streams
 
 def getStreamData(id):
-	# streams = getStreams()
-	# for stream in streams:
-	# 	if stream.ID == id:
-	# 		return stream.VALUE
 	return streamsDict[id]
 
 def startStreams():
@@ -39,6 +36,6 @@ def startStreams():
 def worker(stream, streams):
 	while True:
 		streams[stream.ID] = stream.getValue()
-		logger.info("refreshed stream value: " + stream.NAME)
-		logger.info(streams[stream.ID])
+		#logger.info("refreshed stream value: " + stream.NAME)
+		#logger.info(streams[stream.ID])
 		time.sleep(stream.REFRESH_RATE)

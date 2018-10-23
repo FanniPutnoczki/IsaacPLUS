@@ -26,9 +26,9 @@ LOG_FORMAT='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 VOICE
 '''
 CORPUS_PATH=os.path.join(MAIN_PATH, 'resources', 'sphinx', 'corpus.txt')
-HMM_PATH=os.path.join(MAIN_PATH, 'resources', 'sphinx', 'HMM-en-us')
-LM_PATH=os.path.join(MAIN_PATH, 'resources', 'sphinx', 'lm.lm')
-DICT_PATH=os.path.join(MAIN_PATH, 'resources', 'sphinx', 'dict.dic')
+HMM_PATH=os.path.join(MAIN_PATH, 'resources', 'sphinx', 'en-us')
+LM_PATH=os.path.join(MAIN_PATH, 'resources', 'sphinx', 'en-us.lm.bin')
+DICT_PATH=os.path.join(MAIN_PATH, 'resources', 'sphinx', 'cmudict-en-us.dic')
 SENTENCE_PATH=os.path.join(MAIN_PATH, 'resources', 'sphinx', 'sentences')
 WORD_PATH=os.path.join(MAIN_PATH, 'resources', 'sphinx', 'words')
 CMU_DICT_PATH=os.path.join(MAIN_PATH, 'resources', 'sphinx', 'cmudict.dict')

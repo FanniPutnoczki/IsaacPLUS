@@ -9,10 +9,6 @@ logger = logging.getLogger()
 
 @streams_api.route('/<id>/get', methods=['GET'])
 def getStreamData(id):
-    # logger.info('getting stream data ' + id)
-    # for stream in service.getStreams():
-    #     if (stream.ID == id):
-    #         return dumps(stream.getValue())
     return dumps(service.getStreamData(id))
 
 
@@ -25,7 +21,7 @@ def getStreams():
                 "name": stream.NAME,
                 "id": stream.ID,
                 "refreshRate": stream.REFRESH_RATE,
-                "view": stream.VALUE
+                "view": stream.VIEW
             })
     return dumps(streams)
 

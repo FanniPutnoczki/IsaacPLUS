@@ -5,6 +5,7 @@ from random import randint
 REFRESH_RATE=10
 NAME="Hello Stream - Arduino 1 measuring"
 ID="hellostream"
+
 # type of display on the mobile app. values: text or progress, in case of progress bar, a min and max value is needed too
 VIEW="[{ type: text, name: temperature }, { type: progress, name: humidity, min:1, max:10 }]"
 #return a dictionary that contains a value and a display value
