@@ -21,6 +21,8 @@ export class StreamsComponent {
     
     refresh() {
     	console.info("refreshing streams");
+        this.streams = [];
+        this.connectionError = false;
     	this.loadMask = true;
     }
 

@@ -23,7 +23,7 @@ export class HttpService {
         .timeout(20000)
         .catch(error => {
             console.log(error.message);
-            return Observable.of(null);
+            return Observable.of(undefined);
         });
     }
 

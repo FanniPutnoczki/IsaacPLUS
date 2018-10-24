@@ -13,14 +13,13 @@ export class RoutinesComponent {
 	private loadMask;
 
     constructor() {
-    	this.connectionError = false;
-    	this.loadMask = false;
-        this.routines = [];
         this.refresh();
     }
 
     refresh() {
     	console.info("refreshing routines");
+        this.routines = [];
+        this.connectionError = false;
     	this.loadMask = true;
     }
     
