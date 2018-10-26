@@ -4,29 +4,17 @@ import { HttpService } from "../../shared/http.service";
 @Injectable()
 export class StreamsService {
 
-    private getSkillsUrl: string = "skills/get";
-    private enableSkillUrl: string = "skills/enable/";
-    private disableSkillUrl: string = "skills/disable/";
+    private getStreamsUrl: string = "streams";
+    private getStreamDataUrl: string = "streams/";
+    //private disableSkillUrl: string = "skills/disable/";
 
     constructor(private httpService: HttpService) { }
 
     getStreams(){
-
-        //return this.httpService.get(this.getSkillsUrl);
-
-/*        let skills: Skill[] = [
-            {
-                name: "Hello",
-                url: "...",
-                enabled: false
-            },
-            {
-                name: "Lamp",
-                url: "...",
-                enabled: true
-            }
-        ]
-        return skills;*/
+        return this.httpService.get(this.getStreamsUrl);
     }
     
+    getStreamData(stream) {
+        return this.httpService.get(this.getStreamDataUrl + stream.id);
+    }
 }

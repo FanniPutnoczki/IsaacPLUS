@@ -4,11 +4,16 @@
 	 <ScrollView [visibility]="!connectionError ? 'visible' : 'collapse'" col=0 row=0>
 		<StackLayout>
 				<StackLayout *ngFor="let item of streams">
-					<GridLayout class="box" columns="auto, *, auto" rows="auto">
-<!-- 						<Image verticalAlignment="center" col=0 row=0 (tap)="runSkill(item)" src="res://run" stretch="none" class="img-round"></Image>
-						<Label verticalAlignment="center" col=1 row=0 class="h3" text="{{ item.name }}"></Label>
-						<Switch col=2 row=0 class="switch" checked="{{item.enabled}}" (checkedChange)="onSkillEnabled($event, item)"></Switch> -->
-					</GridLayout>
+					<StackLayout class="box">
+						<Label class="h4" marginBottom=15 text="{{ item.name }}"></Label>
+						<StackLayout *ngFor="let view of item.view" marginBottom=15>
+							<GridLayout columns="*,*" rows='auto'>
+								<Label text="{{ view.name }}"></Label>
+								<Label horizontalAlignment="right" col=1 text="{{ view.data.display ? view.data.display : 0 }}"></Label>
+							</GridLayout>
+							<Progress marginTop=5 class="progress" [visibility]="view.type=='progress' ? 'visible' : 'collapse'"  [value]="view.data.value" max="{{ view.max }}"></Progress>
+						</StackLayout>
+					</StackLayout>
 				</StackLayout>
 		</StackLayout>
 	</ScrollView>

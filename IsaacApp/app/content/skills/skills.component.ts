@@ -20,20 +20,17 @@ export class SkillsComponent {
 		private skillsService: SkillsService,
 		private routerExtensions: RouterExtensions
 	) {
-		console.log("skills constructor");
 		this.connectionError = false;
 		this.skills = [];
 		this.refresh();
 	}
 
 	onSkillEnabled(event, skill) {
-/*		console.dir(event);
 		if(event.value) {
 			this.skillsService.enableSkill(skill).subscribe(r=>{});
 		} else {
 			this.skillsService.disableSkill(skill).subscribe(r=>{});
-		}*/
-		
+		}
 	}
 
 	async handleConversation(cons, answers) {
@@ -63,16 +60,22 @@ export class SkillsComponent {
 		} 
 	}
 
+	//TODO handle if server error
 	async runSkill(skill) {
+
 		console.log("running skill " + skill.name + " " + skill.conversation.length);
+		let answers = {};
 		if(skill.conversation.length > 0) {
-			//todo resolve convo
-			let answers = {};
+
+			let newConvo = await this.skillsService.resolveSkill(skill).toPromise();
+			console.log("resolved convo ", newConvo);
+			skill.conversation = newConvo;
 			await this.handleConversation(skill.conversation, answers);
 			console.log(answers);
-			return;
+
 		}
-		this.skillsService.runSkill(skill).subscribe(r=>{
+
+		this.skillsService.runSkill(skill, answers).subscribe(r=>{
 			console.log(r);
 			if(r !== undefined) {
 				Toast.makeText("Ran " + skill.name).show();
@@ -86,14 +89,15 @@ export class SkillsComponent {
 	refresh() {
 		console.log("refreshing skills");
 		this.skills = [];
-		this.connectionError = false;
+		this.connectionError = true;
 		this.loadMask = true;
 		this.skillsService.getSkills().subscribe(r=>{
-            if(r === null) {
+            if(r == undefined) {
             	this.connectionError = true;
             } else {
             	console.log(r);
             	this.skills = r;
+            	this.connectionError = false;
             }
             this.loadMask = false;
         });

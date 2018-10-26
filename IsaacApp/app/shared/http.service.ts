@@ -27,8 +27,22 @@ export class HttpService {
         });
     }
 
-    private getHeaders() {
-        return {};
+    post(url: string, data) {
+
+        let fullUrl = this.configService.getDomain() + "/api/" + url;
+        console.log("url: " + fullUrl);
+        return this.http.post(fullUrl, data, this.httpOptions)
+        .timeout(20000)
+        .catch(error => {
+            console.log(error.message);
+            return Observable.of(undefined);
+        });
     }
+
+    private httpOptions = {
+        headers: new HttpHeaders({
+            'Content-Type':  'application/json'
+        })
+    };
 
 }

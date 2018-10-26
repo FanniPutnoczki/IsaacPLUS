@@ -5,6 +5,7 @@ import { HttpService } from "../../shared/http.service";
 export class SkillsService {
 
     private getSkillsUrl: string = "skills/get";
+    private resolveSkillUrl: string = "skills/resolve/";
     private enableSkillUrl: string = "skills/enable/";
     private disableSkillUrl: string = "skills/disable/";
 
@@ -29,8 +30,12 @@ export class SkillsService {
         return skills;*/
     }
 
-    runSkill(skill: any) {
-        return this.httpService.get("skills/do/" + skill.name);
+    resolveSkill(skill: any) {
+        return this.httpService.get(this.resolveSkillUrl + skill.name);
+    }
+
+    runSkill(skill: any, answers: any) {
+        return this.httpService.post("skills/do/" + skill.name, answers);
     }
 
     enableSkill(skill: any) {
