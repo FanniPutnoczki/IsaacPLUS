@@ -32,7 +32,7 @@
 			<GridLayout [visibility]="!routine.recurring ? 'visible' : 'collapse' " columns="auto, *, auto" rows="auto">
 				<Label verticalAlignment="center" col=0 row=0 class="h4" text="Date"></Label>
 				<Label col=1 row=0 text=""></Label>
-				<Label verticalAlignment="center" col=2 row=0 text="date" (tap)="pickDate()"></Label>
+				<Label verticalAlignment="center" col=2 row=0 text="{{ dayDisplay }}" (tap)="pickDate()"></Label>
 			</GridLayout>
 
 			<TimePicker (timeChange)="onTimeChanged($event)" verticalAlignment="center" class="m-15"></TimePicker>

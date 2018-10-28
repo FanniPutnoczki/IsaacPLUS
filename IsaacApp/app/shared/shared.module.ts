@@ -36,6 +36,10 @@ import { NativeScriptFormsModule } from "nativescript-angular/forms";
         ActionBarComponent,
         DatePickerDialog,
         ListDialog
+    ],
+    entryComponents: [
+        ListDialog,
+        DatePickerDialog
     ]
 })
 

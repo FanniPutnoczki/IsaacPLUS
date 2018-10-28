@@ -17,6 +17,7 @@ export class RoutinesAddComponent {
 	private skills;
 	private routine;
 	private days = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+	private dayDisplay;
 
     constructor(
     	private modalService: ModalDialogService,
@@ -28,15 +29,29 @@ export class RoutinesAddComponent {
 
         this.isNew = true;
 
-        if(isNew) {
+        if(this.isNew) {
+        	let d = new Date();
         	this.routine = {
 	        	days: [false,false,false,false,false,false,false],
-	        	skills: []
+	        	skills: [],
+	        	date: {
+	        		day: d.getDate(),
+	        		month: d.getMonth()+1,
+	        		year: d.getFullYear()
+	        	}
 	        };
         } else {
         	//TODO get routine data based on id from route parameter
         }
+
+        this.setFormattedDate();
     
+    }
+
+    setFormattedDate() {
+		var options = { year: '2-digit', month: 'short', day: 'numeric' };
+        this.dayDisplay = new Date(this.routine.date.year, this.routine.date.month-1, this.routine.date.day).toLocaleDateString('en-US', options);
+        console.log(this.dayDisplay);
     }
 
     getSkills() {
@@ -79,11 +94,13 @@ export class RoutinesAddComponent {
     	this.modalService.showModal(DatePickerDialog, {
     		viewContainerRef: this.viewContainerRef,
     		context: {
-
+    			date: this.routine.date
     		}
     	}).then(r => {
     		if(r.result) {
-
+    			console.log(r.date);
+    			this.routine.date = r.date;
+    			this.setFormattedDate();
     		}
     	});
     }
