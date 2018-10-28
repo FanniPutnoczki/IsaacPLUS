@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { ModalDialogParams } from "nativescript-angular/modal-dialog";
+import { RouterExtensions } from "nativescript-angular/router";
 
 @Component({
     selector: "routines",
@@ -12,7 +12,7 @@ export class RoutinesComponent {
 	private routines;
 	private loadMask;
 
-    constructor() {
+    constructor(private routerExtensions: RouterExtensions) {
         this.refresh();
     }
 
@@ -20,7 +20,18 @@ export class RoutinesComponent {
     	console.info("refreshing routines");
         this.routines = [];
         this.connectionError = false;
-    	this.loadMask = true;
+    	this.loadMask = false;
     }
     
+    addRoutine() {
+        console.log("settings button pushed");
+        this.routerExtensions.navigate(["/routines", ""], {
+            transition: {
+                name: "slideLeft",
+                duration: 500,
+                curve: "linear"
+            }
+        });
+    }
+
 }

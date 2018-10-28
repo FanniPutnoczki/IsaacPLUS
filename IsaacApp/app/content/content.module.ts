@@ -10,9 +10,8 @@ import { ContentComponent } from "./content.component";
 
 import { StreamsComponent } from "./streams/streams.component";
 import { RoutinesComponent } from "./routines/routines.component";
+import { RoutinesAddComponent } from "./routines/routines.add.component";
 import { SkillsComponent } from "./skills/skills.component";
-
-import { RoutinesDialog } from "./routines/routines.dialog";
 
 import { SkillsService } from "./skills/skills.service";
 import { StreamsService } from "./streams/streams.service";
@@ -30,6 +29,7 @@ import { RoutinesService } from "./routines/routines.service";
     declarations: [
         ContentComponent,
         RoutinesComponent,
+        RoutinesAddComponent,
         StreamsComponent,
         SkillsComponent
     ],

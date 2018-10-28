@@ -10,6 +10,10 @@ export class RoutinesService {
 
     constructor(private httpService: HttpService) { }
 
+    getRoutine(id: string) {
+
+    }
+
     getRoutines(){
 
         //return this.httpService.get(this.getSkillsUrl);
@@ -29,7 +33,7 @@ export class RoutinesService {
         return skills;*/
     }
 
-    addRoutine() {
+    addRoutine(routine: any) {
 
     }
 

@@ -7,6 +7,10 @@ import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { HttpService } from "./http.service";
 import { ConfigService } from "./config.service";
 import { ActionBarComponent } from "./action.bar.component";
+
+import { DatePickerDialog } from "./dialogs/date.picker.dialog";
+import { ListDialog } from "./dialogs/list.dialog";
+
 import { NativeScriptFormsModule } from "nativescript-angular/forms";
 
 @NgModule({
@@ -19,7 +23,9 @@ import { NativeScriptFormsModule } from "nativescript-angular/forms";
         NativeScriptRouterModule
     ],
     declarations: [
-        ActionBarComponent
+        ActionBarComponent,
+        DatePickerDialog,
+        ListDialog
     ],
     providers: [
         HttpService,
@@ -27,7 +33,9 @@ import { NativeScriptFormsModule } from "nativescript-angular/forms";
     ],
     exports: [
         NativeScriptRouterModule,
-        ActionBarComponent
+        ActionBarComponent,
+        DatePickerDialog,
+        ListDialog
     ]
 })
 

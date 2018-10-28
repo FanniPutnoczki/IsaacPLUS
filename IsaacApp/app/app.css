@@ -25,3 +25,44 @@ refer to http://docs.nativescript.org/ui/theme.
 	background-color: white;
 	/*box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.5);*/
 }
+
+.add-button {
+	font-size: 30;
+	color: white;
+}
+
+.banner {
+	padding: 5;
+	padding-right: 15;
+	background-color: #92b3e8;
+}
+
+.days {
+	margin: 5,0;
+	margin-bottom: 15;
+	/*border-color: white;
+	border-width: 1;*/
+	/*border-radius: 20;*/
+}
+
+.selected-day {
+	color: #4a86e8;
+	font-weight: bold;
+}
+
+.day {
+	padding: 5;
+}
+
+.small-txt {
+	font-size: 12;
+	font-style: italic;
+}
+
+.tiny-btn {
+	font-size: 11;
+	padding: 0;
+	height: 25;
+	width: 60;
+	margin: 0;
+}
