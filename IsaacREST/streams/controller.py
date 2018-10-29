@@ -7,7 +7,7 @@ streams_api = Blueprint('streams_api', __name__)
 
 logger = logging.getLogger()
 
-@streams_api.route('/<id>/get', methods=['GET'])
+@streams_api.route('/<id>', methods=['GET'])
 def getStreamData(id):
     return dumps(service.getStreamData(id))
 

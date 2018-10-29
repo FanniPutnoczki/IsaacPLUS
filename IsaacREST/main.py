@@ -18,13 +18,13 @@ api = Api(app)
 cors = CORS(app)
 
 # blueprints
-app.register_blueprint(notif_api, url_prefix='/api/notifications')
+app.register_blueprint(notif_api, url_prefix='/api/routines')
 app.register_blueprint(skills_api, url_prefix='/api/skills')
 app.register_blueprint(streams_api, url_prefix='/api/streams')
 
 #moved to brain.py
-#skills.service.insertSkills()
-#streams.service.startStreams()
+skills.service.insertSkills()
+streams.service.startStreams()
 
 if __name__ == '__main__':
 	app.run(debug=True, host= settings.HOST, port=settings.PORT)

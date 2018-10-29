@@ -2,19 +2,46 @@ from flask import Blueprint, request
 import os, pkgutil, settings, logging
 from bson.json_util import dumps
 import skills.service as service
+from flask import abort, request
 
 skills_api = Blueprint('skills_api', __name__)
 
 logger = logging.getLogger()
 
-@skills_api.route('/do/<name>', methods=['GET'])
+@skills_api.route('/resolve/<name>', methods=['GET'])
+def resolve(name):
+    logger.info('resolving ' + name)
+    skill = service.get_skill(name)
+    if hasattr(skill, "PARENT"):
+        abort(400, 'child skills do not require answers because they already have one')
+    if (service.isEnabled(name)):
+        data = skill.before_conversation()
+        new_convo = service.resolve_conversation_data(data,skill.CONVERSATION)
+        return dumps(new_convo)
+    else:
+        abort(405, 'skill is not enabled') 
+
+@skills_api.route('/do/<name>', methods=['POST'])
 def do(name):
     logger.info('executing ' + name)
-    for skill in service.collectSkills():
-        if ((skill.NAME == name)
-            and (service.isEnabled(name))):
-            answer = skill.do()
-    return dumps(answer)
+    answer = ""
+    try:
+        skill = service.get_skill(name)
+    except Exception as e:
+        abort(404, 'skill not found')
+    if (service.isEnabled(name)):
+        if hasattr(skill, "PARENT"):
+            parent = service.get_skill(skill.PARENT)
+            answer = parent.do(skill.ANSWERS)
+        else:
+            if not len(skill.CONVERSATION) == 0:
+                answers = request.get_json()
+                answer = skill.do(answers)
+            else:
+                answer = skill.do()
+        return dumps(answer)
+    else:
+        abort(405, 'skill is not enabled')
 
 @skills_api.route('/enable/<name>', methods=['GET'])
 def enable(name):
@@ -32,10 +59,15 @@ def disable(name):
 def getAll():
     skills = []
     for skill in service.collectSkills():
+        convo = []
+        if hasattr(skill, "CONVERSATION"):
+            convo = skill.CONVERSATION
+            pass
         skills.append({
                 "name": skill.NAME,
                 "url": "/skills/do/" + skill.NAME,
-                "enabled": service.isEnabled(skill.NAME)
+                "enabled": service.isEnabled(skill.NAME),
+                "conversation": convo
             })
     return dumps(skills)
 

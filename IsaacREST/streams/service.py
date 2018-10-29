@@ -1,5 +1,5 @@
 import os, pkgutil, settings, logging
-from bson.json_util import dumps
+from json import dumps
 import threading
 import time
 

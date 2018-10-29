@@ -4,8 +4,8 @@ from flask_restful import Resource, Api
 NAME='Hello'
 FULL_NAME="Hello World"
 
-# should it appear in the mobile app or is it a voice based skill?
-VOICE_ONLY=True
+#Should it appear in the mobile app?
+HIDDEN=False
 
 # optional description of the skill
 DESCRIPTION=''
@@ -25,7 +25,7 @@ CONVERSATION=[
 		"selection": {
 			"dark": [
 				{
-					"prompt": "Dark colors are cool. Do you also like dark red?",
+					"prompt": "Dark colors are cool. Do you also like dark <color>?",
 					"input": "select",
 					"key": "darkred",
 					"selection": {
@@ -62,5 +62,11 @@ CONVERSATION=[
 	}
 ]
 
-def do():
-    pass
+def before_conversation():
+	return {
+	"color": "red"
+	}
+
+#optionally returns an answer that isaac says, but only when there was a conversation before.
+def do(answers):
+    return "finished"

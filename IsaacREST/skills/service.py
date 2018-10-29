@@ -1,6 +1,6 @@
 import os, pkgutil, settings, logging
 import connection
-from bson.json_util import dumps
+from bson.json_util import dumps, loads
 
 skills = connection.mongo.isaac.skills
 
@@ -16,6 +16,14 @@ def collectSkills():
                 logger.info("skill found: " + getattr(skill, 'NAME'))
                 skills.append(skill)
     return skills
+
+def get_skill(name):
+    all = collectSkills()
+    for skill in all:
+        if skill.NAME == name:
+            return skill
+    raise ModuleNotFoundError("Skill not found with name: " + name)
+
 
 #checks if skill is enabled
 def isEnabled(name):
@@ -59,3 +67,12 @@ def disable(name):
                 'enabled': False
                 }
             })
+
+def resolve_conversation_data(data, convo):
+    text = dumps(convo)
+
+    for key in data:
+        text = text.replace("<"+ key +">", data[key])
+
+    logger.info(text)
+    return loads(text)
