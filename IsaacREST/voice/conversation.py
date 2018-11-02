@@ -5,13 +5,13 @@ CONVERSATION=[
 		"input": "string"
 	},
 	{
-		"prompt": "<answer[0]> is my favourite color too. Do you like dark or light <answer[0]>?",
+		"prompt": "<answer[color]> is my favourite color too. Do you like dark or light <answer[color]>?",
 		"input": "select",
 		"key": "lightness",
 		"selection": {
 			"dark": [
 				{
-					"prompt": "Dark colors are cool. Do you also like dark red?",
+					"prompt": "Dark colors are cool. Do you also like dark green?",
 					"input": "select",
 					"key": "darkred",
 					"selection": {
@@ -50,6 +50,7 @@ CONVERSATION=[
 
 def handle_conversation(cons, answers):
 	for con in cons:
+		#TODO resolve previous answers
 		print(con["prompt"])
 		if "input" in con:
 			answer = input()
