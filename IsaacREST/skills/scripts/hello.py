@@ -15,11 +15,11 @@ KEYWORDS = ['hi', 'hello', 'hey']
 CONVERSATION=[
 	{
 		"prompt": "What is your favourite color?",
-		"key": "color",
+		"key": "favColor",
 		"input": "string"
 	},
 	{
-		"prompt": "<answer[0]> is my favourite color too. Do you like dark or light <answer[0]>?",
+		"prompt": "<answer[favColor]> is my favourite color too. Do you like dark or light <answer[favColor]>?",
 		"input": "select",
 		"key": "lightness",
 		"selection": {
@@ -64,7 +64,7 @@ CONVERSATION=[
 
 def before_conversation():
 	return {
-	"color": "red"
+	"color": "green"
 	}
 
 #optionally returns an answer that isaac says, but only when there was a conversation before.
