@@ -12,7 +12,7 @@ CHUNK_SIZE = 1024
 FORMAT = pyaudio.paInt16
 RATE = 8000
 SHORT_NORMALIZE = (1.0/32768.0)
-access_key = ''  # Your wit.ai key should go here.
+access_key = '66FCPZN3JY2HICKPA5WTVEFVCKMXHISY'  # Your wit.ai key should go here.
 
 
 # Returns if the RMS of block is less than the threshold
@@ -38,7 +38,7 @@ def returnUpTo(iterator, values, returnNum):
 
     else:
         temp = len(values) - iterator
-        return (iterator + temp + 1, "".join(values[iterator:iterator + temp]))
+        return (iterator + temp + 1, str("".join(str(values[iterator:iterator + temp]))))
 
 
 # Python generator- yields roughly 512k to generator.
@@ -47,7 +47,7 @@ def gen(p, stream):
     snd_started = False
     start_pack = 0
     counter = 0
-    print "Microphone on!"
+    print ("Microphone on!")
     i = 0
     data = []
 
@@ -67,7 +67,7 @@ def gen(p, stream):
             if i < 0:                     # so we can hear the start of speech.
                 i = 0
             snd_started = True
-            print "TRIGGER at " + str(rms) + " rms."
+            print ("TRIGGER at " + str(rms) + " rms.")
 
         elif not silent and snd_started and not i >= len(data):
             i, temp = returnUpTo(i, data, 1024)
@@ -75,22 +75,22 @@ def gen(p, stream):
             num_silent = 0
 
         if snd_started and num_silent > 5:
-            print "Stop Trigger"
+            print ("Stop Trigger")
             break
 
         if counter > 75:  # Slightly less than 10 seconds.
-            print "Timeout, Stop Trigger"
+            print ("Timeout, Stop Trigger")
             break
 
         if snd_started:
             counter = counter + 1
 
     # Yield the rest of the data.
-    print "Pre-streamed " + str(i) + " of " + str(len(data)) + "."
+    print ("Pre-streamed " + str(i) + " of " + str(len(data)) + ".")
     while (i < len(data)):
         i, temp = returnUpTo(i, data, 512)
         yield temp
-    print "Swapping to thinking."
+    print ("Swapping to thinking.")
 
 
 if __name__ == '__main__':
@@ -98,7 +98,7 @@ if __name__ == '__main__':
     stream = p.open(format=FORMAT, channels=1, rate=RATE,
                     input=True, output=True,
                     frames_per_buffer=CHUNK_SIZE)
-
+    print ("say something")
     headers = {'Authorization': 'Bearer ' + access_key,
                'Content-Type': 'audio/raw; encoding=signed-integer; bits=16;' +
                ' rate=8000; endian=little', 'Transfer-Encoding': 'chunked'}
@@ -108,8 +108,8 @@ if __name__ == '__main__':
     stream.stop_stream()
     stream.close()
     p.terminate()
-    print foo.text
-    print "Done."
+    print (foo.text)
+    print ("Done.")
 
 def get_speech():
     p = pyaudio.PyAudio()
@@ -126,5 +126,5 @@ def get_speech():
     stream.stop_stream()
     stream.close()
     p.terminate()
-    print foo.text
+    print (foo.text)
     return foo.text
