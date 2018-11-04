@@ -3,24 +3,21 @@ import voice.tts as tts
 import logging
 import skills.service as skills
 import streams.service as streams
+import notification.handler as routines
 import time
 import voice.conversation as conversation
 
 logger = logging.getLogger()
+logger.info("starting brain")
+
+kw = stt.KeywordListener()
 
 skills.insertSkills()
 streams.startStreams()
 stt.generate_keyword_list()
-#todo routine handler start up
-
-
-logger.info("starting brain")
-
-#todo resolve routine conversations and execute them if they are in the queue
-
-kw = stt.KeywordListener()
-
+routines.start_routine_listener()
 kw.start_passive_listen()
+
 while True:
 	if kw.keyword_said():
 		print("keyword said")
@@ -41,7 +38,11 @@ while True:
 				break
 
 	else:
+		while not routines.queue.empty():
+			routine = routines.queue.get()
+			logger.info("executing routine: " + routine.name)
 		pass
+		#todo resolve routine conversations and execute them if they are in the queue
 		#print("checking for notifs")
 
 	time.sleep(1)
