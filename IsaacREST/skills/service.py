@@ -9,11 +9,11 @@ logger = logging.getLogger()
 def collectSkills():
     skills = []
     path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'scripts')
-    logger.info("collecting skills from: " + path)
+    logger.debug("collecting skills from: " + path)
     for finder, modname, ispkg in pkgutil.walk_packages([path]):
         skill = finder.find_module(modname).load_module(modname)
         if (hasattr(skill, 'NAME')):
-                logger.info("skill found: " + getattr(skill, 'NAME'))
+                logger.debug("skill found: " + getattr(skill, 'NAME'))
                 skills.append(skill)
     return skills
 
@@ -72,7 +72,30 @@ def resolve_conversation_data(data, convo):
     text = dumps(convo)
 
     for key in data:
-        text = text.replace("<"+ key +">", data[key])
+        text = text.replace("<"+ key +">", data.get(key, "undefined"))
 
     logger.info(text)
     return loads(text)
+
+def find_match(command):
+    for skill in collectSkills():
+        if hasattr(skill, "KEYWORDS"):
+            for kw in skill.KEYWORDS:
+                if kw in command:
+                    return skill
+    raise ModuleNotFoundError("Cannot find skill for command: " + command)
+
+def handle_skill(skill, answers):
+    if isEnabled(skill.NAME):
+        if hasattr(skill, "PARENT"):
+            parent = get_skill(skill.PARENT)
+            parent.do(skill.ANSWERS)
+        else:
+            if hasattr(skill, "CONVERSATION"):
+                if answers == None:
+                    #push into a list because the conversation needs to be resolved first
+                    pass
+                else:
+                    skill.do(answers)
+            else:
+                skill.do()

@@ -34,7 +34,7 @@ def is_silent(block):
 def returnUpTo(iterator, values, returnNum):
     if iterator+returnNum < len(values):
         return (iterator + returnNum,
-                "".join(values[iterator:iterator + returnNum]))
+                "".join(str(values[iterator:iterator + returnNum])))
 
     else:
         temp = len(values) - iterator
@@ -128,3 +128,5 @@ def get_speech():
     p.terminate()
     print (foo.text)
     return foo.text
+
+get_speech()

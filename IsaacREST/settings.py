@@ -3,9 +3,6 @@ import logging
 MONGO_HOST='localhost'
 MONGO_PORT=27017
 
-LOG_LEVEL=logging.DEBUG
-LOG_FORMAT='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-
 HOST = '0.0.0.0'
 PORT = 5000
 
@@ -17,3 +14,4 @@ VOICE="gtts"
 
 ASSISTANT_NAME="isaac"
 
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')

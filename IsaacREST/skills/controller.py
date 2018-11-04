@@ -30,16 +30,20 @@ def do(name):
     except Exception as e:
         abort(404, 'skill not found')
     if (service.isEnabled(name)):
-        if hasattr(skill, "PARENT"):
-            parent = service.get_skill(skill.PARENT)
-            answer = parent.do(skill.ANSWERS)
-        else:
-            if not len(skill.CONVERSATION) == 0:
-                answers = request.get_json()
-                answer = skill.do(answers)
-            else:
-                answer = skill.do()
-        return dumps(answer)
+        answers = None
+        if hasattr(skill.CONVERSATION):
+            answers = request.get_json()
+        service.handle_skill(skill, answers)
+        # if hasattr(skill, "PARENT"):
+        #     parent = service.get_skill(skill.PARENT)
+        #     answer = parent.do(skill.ANSWERS)
+        # else:
+        #     if not len(skill.CONVERSATION) == 0:
+        #         answers = request.get_json()
+        #         answer = skill.do(answers)
+        #     else:
+        #         answer = skill.do()
+        # return dumps({})
     else:
         abort(405, 'skill is not enabled')
 
