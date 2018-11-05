@@ -2,6 +2,7 @@ import { Component, ViewChild } from "@angular/core";
 import { ModalDialogParams } from "nativescript-angular/modal-dialog";
 import { RouterExtensions } from "nativescript-angular/router";
 import * as Toast from 'nativescript-toast';
+import { Page } from 'tns-core-modules/ui/page';
 
 import { SkillsComponent } from "./skills/skills.component";
 import { StreamsComponent } from "./streams/streams.component";
@@ -19,14 +20,13 @@ export class ContentComponent {
 	@ViewChild(RoutinesComponent) routinesComponent: RoutinesComponent;
 
 
-    constructor(private routerExtensions: RouterExtensions) {
-    	console.log("content constructor");
+    constructor(
+    	private routerExtensions: RouterExtensions,
+    	private page: Page) {
+    	this.page.on('unloaded ', (data) => {
+    		this.streamsComponent.unload();
+	    });
     }
-
-/*    onConnectionError(event) {
-    	console.log("onConnectionError");
-    	this.connError = true;
-    }*/
 
     settings() {
     	console.log("settings button pushed");

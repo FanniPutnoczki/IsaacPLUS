@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpService } from "../../shared/http.service";
 
 @Injectable()
-export class StreamsService {
+export class StreamsService  {
 
     private getStreamsUrl: string = "streams";
     private getStreamDataUrl: string = "streams/";

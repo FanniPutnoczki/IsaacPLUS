@@ -89,13 +89,12 @@ export class SkillsComponent {
 	refresh() {
 		console.log("refreshing skills");
 		this.skills = [];
-		this.connectionError = true;
+		this.connectionError = false;
 		this.loadMask = true;
 		this.skillsService.getSkills().subscribe(r=>{
             if(r == undefined) {
             	this.connectionError = true;
             } else {
-            	console.log(r);
             	this.skills = r;
             	this.connectionError = false;
             }

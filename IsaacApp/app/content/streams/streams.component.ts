@@ -17,15 +17,16 @@ export class StreamsComponent {
 
     constructor(
         private streamsService: StreamsService) {
-        
+        console.log("const");
         this.connectionError = false;
         this.streams = [];
         this.loadMask = false;
-        this.intervalsStarted = false;
+        //this.intervalsStarted = true;
         this.refresh();
     }
     
     refresh() {
+        this.stopIntervals();
     	console.info("refreshing streams");
         this.streams = [];
         this.connectionError = false;
@@ -35,7 +36,7 @@ export class StreamsComponent {
                 this.connectionError = false;
                 this.loadMask = false;
                 this.streams = r
-                console.dir(this.streams);
+                //console.dir(this.streams);
                 for(let stream of this.streams) {
                     this.setData(stream);
                 }
@@ -57,12 +58,13 @@ export class StreamsComponent {
                     stream.view[i].data = r[i];
                 }
             }
-            console.dir(stream);
+            //console.dir(stream);
         });
     }
 
     startIntervals() {
-        this.intervalsStarted = true;
+        console.log("adding intervals")
+        //this.intervalsStarted = true;
         for(let stream of this.streams) {
             stream["interval"] = setInterval(() => {
                 this.setData(stream);
@@ -71,11 +73,16 @@ export class StreamsComponent {
     }
 
     stopIntervals() {
-        if(this.intervalsStarted) {
+        console.log("stopping intervals");
+        if(true) {
             for(let stream of this.streams) {
                 clearInterval(stream["interval"]);
             }           
         }
+    }
+
+    unload() {
+        this.stopIntervals();
     }
 
 }

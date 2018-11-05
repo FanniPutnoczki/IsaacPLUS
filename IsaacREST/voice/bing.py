@@ -1,54 +1,47 @@
 import json
 import requests
+import settings
 
-YOUR_API_KEY = 'ENTER_YOUR_KEY_HERE'
-YOUR_AUDIO_FILE = 'ENTER_PATH_TO_YOUR_AUDIO_FILE_HERE'
-REGION = 'ENTER_YOUR_REGION' # westus, eastasia, northeurope 
+REGION = 'westeurope' # westus, eastasia, northeurope 
 MODE = 'interactive'
 LANG = 'en-US'
+#TODO check what detailed returns
 FORMAT = 'simple'
-
-
-def handler():
-    # 1. Get an Authorization Token
-    token = get_token()
-    # 2. Perform Speech Recognition
-    results = get_text(token, YOUR_AUDIO_FILE)
-    # 3. Print Results
-    print(results)
+CHUNK = 1024
 
 def get_token():
-    # Return an Authorization Token by making a HTTP POST request to Cognitive Services with a valid API key.
     url = 'https://api.cognitive.microsoft.com/sts/v1.0/issueToken'
     headers = {
-        'Ocp-Apim-Subscription-Key': YOUR_API_KEY
+        'Ocp-Apim-Subscription-Key': settings.MICROSOFT_KEY
     }
     r = requests.post(url, headers=headers)
     token = r.content
     return(token)
 
-def get_text(token, audio):
-    # Request that the Bing Speech API convert the audio to text
+def recognize_speech(file_path, long=False):
+    #TODO switch mode to conversation if long
+    token = get_token()
     url = 'https://{0}.stt.speech.microsoft.com/speech/recognition/{1}/cognitiveservices/v1?language={2}&format={3}'.format(REGION, MODE, LANG, FORMAT)
     headers = {
         'Accept': 'application/json',
-        'Ocp-Apim-Subscription-Key': YOUR_API_KEY,
+        'Ocp-Apim-Subscription-Key': settings.MICROSOFT_KEY,
         'Transfer-Encoding': 'chunked',
         'Content-type': 'audio/wav; codec=audio/pcm; samplerate=16000',
         'Authorization': 'Bearer {0}'.format(token)
     }
-    r = requests.post(url, headers=headers, data=stream_audio_file(audio))
+    r = requests.post(url, headers=headers, data=stream_file(file_path))
     results = json.loads(r.content)
     return results
 
-def stream_audio_file(speech_file, chunk_size=1024):
-    # Chunk audio file
-    with open(speech_file, 'rb') as f:
-        while 1:
-            data = f.read(1024)
+def stream_file(file_path):
+    with open(file_path, 'rb') as f:
+        while True:
+            data = f.read(CHUNK)
             if not data:
                 break
             yield data
+  
 
-if __name__ == '__main__':
-    handler()
+
+
+

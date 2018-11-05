@@ -1,8 +1,12 @@
 import os, pkgutil, settings, logging
 import connection
 from bson.json_util import dumps, loads
+from queue import Queue
 
 skills = connection.mongo.isaac.skills
+
+#contains skills with unresolved data and conversations
+complex_skill_queue = Queue() 
 
 logger = logging.getLogger()
 
@@ -84,17 +88,44 @@ def find_match(command):
                     return skill
     raise ModuleNotFoundError("Cannot find skill for command: " + command)
 
+def is_complex(skill):
+    return (hasattr(skill,"CONVERSATION"))
+
 def handle_skill(skill, answers):
+    if is_complex(skill) and answers == None:
+        complex_skill_queue.put(skill, False)
+    else:
+        run_skill(skill, answers)
+    # if isEnabled(skill.NAME):
+    #     if hasattr(skill, "PARENT"):
+    #         parent = get_skill(skill.PARENT)
+    #         parent.do(skill.ANSWERS)
+    #     else:
+    #         if is_complex(skill):
+    #             if answers == None:
+    #                 complex_skill_queue.put(skill, False)
+    #                 pass
+    #             else:
+    #                 skill.do(answers)
+    #         else:
+    #             skill.do()
+
+# runs the skill inmediately. Use the handle_skill method because it's safer
+def run_skill(skill, answers):
     if isEnabled(skill.NAME):
         if hasattr(skill, "PARENT"):
             parent = get_skill(skill.PARENT)
             parent.do(skill.ANSWERS)
         else:
-            if hasattr(skill, "CONVERSATION"):
+            if is_complex(skill):
                 if answers == None:
-                    #push into a list because the conversation needs to be resolved first
-                    pass
-                else:
-                    skill.do(answers)
+                    #TODO test this part
+                    convo = skill.CONVERSATION
+                    answers = dict()
+                    if hasattr(skill, "before_conversation"):
+                        data = skill.before_conversation()
+                        convo = resolve_conversation_data(data, convo)
+                    conversation.handle_conversation(convo, answers)
+                skill.do(answers)
             else:
                 skill.do()

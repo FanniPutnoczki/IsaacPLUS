@@ -41,21 +41,14 @@ while True:
 		while not routines.queue.empty():
 			routine = routines.queue.get()
 			logger.info("executing routine: " + routine.name)
-		pass
+			tts.say(routine["message"])
+			for skill_name in routine["skills"]:
+				skill = skills.get_skill(skill_name)
+				skills.run_skill(skill)
+		while not skills.complex_skill_queue.empty():
+			skill = skills.complex_skill_queue.get()
+			logger.info("executing skill from complex_skill_queue: " + skill.NAME)
+			skills.run_skill(skill)
 		#todo resolve routine conversations and execute them if they are in the queue
-		#print("checking for notifs")
 
 	time.sleep(1)
-
-
-
-def do_conversation(skill):
-	convo = ""
-	if hasattr(skill, "before_conversation"):
-		data = skill.before_conversation() 
-		convo = skills.resolve_conversation_data(data, skill.CONVERSATION)
-	else:
-		convo = skill.CONVERSATION
-	answers = dict()
-	conversation.handle_conversation(convo, answers)
-	return answers

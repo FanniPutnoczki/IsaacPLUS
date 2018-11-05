@@ -1,15 +1,20 @@
 <ActivityIndicator [visibility]="loadMask ? 'visible' : 'collapse'" busy="true" marginTop=80 width="50" height="50" class="activity-indicator"></ActivityIndicator>
-<GridLayout class="page" columns="*" rows="auto, *">
-	<StackLayout class="banner" col=0 row=0>
-		<Label color="white" horizontalAlignment="right" class="add-button" (tap)="addRoutine()" text="+"></Label>
-	</StackLayout>
-	<Label col=0 row=1 text="CONNECTION ERROR" [visibility]="connectionError ? 'visible' : 'collapse'" class="h3" color="#aaaaaa" horizontalAlignment='center' marginTop=130></Label>
-	<ScrollView [visibility]="!connectionError ? 'visible' : 'collapse'" col=0 row=1>
+<GridLayout class="page" columns="*" rows="*, auto">
+	<Label col=0 row=0 text="CONNECTION ERROR" [visibility]="connectionError ? 'visible' : 'collapse'" class="h3" color="#aaaaaa" horizontalAlignment='center' marginTop=130></Label>
+	<ScrollView [visibility]="!connectionError ? 'visible' : 'collapse'" col=0 row=0>
 		<StackLayout>
-				<StackLayout *ngFor="let item of routines">
-					<GridLayout class="box" columns="auto, *, auto" rows="auto">
+				<StackLayout *ngFor="let item of routines" class="small-box">
+					<GridLayout (tap)="editRoutine(item)" class="" columns="auto, *, auto" rows="auto,auto">
+						<Label col=2 row=0 text="x" (tap)="deleteRoutine(item)" horizontalAlignment="right" marginBottom=10 paddingBottom=10 paddingLeft="10" paddingRight=0></Label>
+						<Label col=0 row=0 verticalAlignment="bottom" class="h4" text="{{ item.name }}"></Label>
+						<Label col=0 row=1 text="{{item.displayDate}}"></Label>
+						<Label col=1 row=1 text=""></Label>
+						<Label col=2 row=1 text="{{item.displayTime}}"></Label>
 					</GridLayout>
 				</StackLayout>
 		</StackLayout>
 	</ScrollView>
+	<GridLayout col=0 row=1 class="" columns="*" rows="auto">
+		<Button (tap)="addRoutine()" class="btn-primary" text="ADD"></Button>
+	</GridLayout>
 </GridLayout>

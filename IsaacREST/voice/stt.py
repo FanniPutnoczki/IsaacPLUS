@@ -7,7 +7,8 @@ import multiprocessing
 from ctypes import c_char_p
 import os
 import logging
-
+import voice.bing as bing
+import voice.mic as mic
 
 MAIN_PATH = os.path.dirname(os.path.realpath(__file__))
 logger = logging.getLogger()
@@ -38,7 +39,7 @@ class KeywordListener:
 
 
 
-# #TODO different length different threshold https://cmusphinx.github.io/wiki/tutoriallm/
+# TODO different length different threshold https://cmusphinx.github.io/wiki/tutoriallm/
 def generate_keyword_list():
     try:
         os.remove("keys.list")
@@ -52,8 +53,8 @@ def generate_keyword_list():
                 f.write("\n")
     f.close()
 
-# #TODO replace path
-def get_speech_process(string):
+# TODO replace path
+def __get_speech_process(string):
     for phrase in LiveSpeech(lm=False, verbose=False, kws="/home/fox/Git/IsaacPLUS/IsaacREST/keys.list"):
         string.value = str(phrase)
         return
@@ -62,15 +63,17 @@ def get_command(timeout):
     logger.info("Listening for command")
     manager = multiprocessing.Manager()
     string = manager.Value(c_char_p, "")
-    p = multiprocessing.Process(target=get_speech_process, args=(string,))
+    p = multiprocessing.Process(target=__get_speech_process, args=(string,))
     p.start()
     p.join(timeout)
     p.terminate()
     logger.info("you said: " + string.value)
     return string.value
 
-
-# p = multiprocessing.Process(target=wait_for_wake_process)
-
-#wait_for_wake()
-#get_command()
+def get_speech(long=False):
+    mic.record_from_mic("temp.wav")
+    speech = bing.recognize_speech("temp.wav", long)
+    logger.info(speech)
+    if speech["RecognitionStatus"] == "Success":
+        return speech["DisplayText"]
+    return ""

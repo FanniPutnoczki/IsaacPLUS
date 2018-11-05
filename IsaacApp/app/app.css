@@ -26,6 +26,13 @@ refer to http://docs.nativescript.org/ui/theme.
 	/*box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.5);*/
 }
 
+.small-box {
+	margin: 5,15;
+	padding: 10;
+	background-color: white;
+	/*box-shadow: 0 10px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.5);*/
+}
+
 .add-button {
 	font-size: 30;
 	color: white;

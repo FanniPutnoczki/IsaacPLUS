@@ -12,10 +12,10 @@
 					<Label verticalAlignment="center" class="h4" text="+ "></Label>
 					<Label verticalAlignment="center" text="Add a skill"></Label>
 				</StackLayout>
-				<GridLayout class="box" *ngFor="let skill of routine.skills" columns="auto, *, auto" rows="auto">
-					<Label verticalAlignment="center" col=0 row=0 class="h4" text="{{skill.name}}"></Label>
+				<GridLayout class="small-box" *ngFor="let skill of routine.skills" columns="auto, *, auto" rows="auto">
+					<Label verticalAlignment="center" col=0 row=0 class="h4" text="{{skill}}"></Label>
 					<Label col=1 row=0 text=""></Label>
-					<Label verticalAlignment="center" col=2 row=0 class="btn btn-outline" text="x" (tap)="removeSkill(skill)"></Label>
+					<Label verticalAlignment="center" col=2 row=0 class="" text="x" (tap)="removeSkill(skill)"></Label>
 				</GridLayout>	
 			</StackLayout>
 			
@@ -35,7 +35,7 @@
 				<Label verticalAlignment="center" col=2 row=0 text="{{ dayDisplay }}" (tap)="pickDate()"></Label>
 			</GridLayout>
 
-			<TimePicker (timeChange)="onTimeChanged($event)" verticalAlignment="center" class="m-15"></TimePicker>
+			<TimePicker (loaded)="onPickerLoaded($event)" verticalAlignment="center" class="m-15"></TimePicker>
 
 			<Label class="h4" text="Message"></Label>
 			<TextView height="100" [(ngModel)]="routine.message"></TextView>
@@ -43,9 +43,9 @@
 		</StackLayout>
 	</ScrollView>
 	<GridLayout col=0 row=1 columns="auto, *, auto" rows="auto">
-		<Button col=0 row=0 class="btn btn-outline" text="Cancel" (tap)="cancel()"></Button>
+		<Button margin=5 col=0 row=0 class="btn btn-outline" text="Cancel" (tap)="cancel()"></Button>
 		<Label col=1 row=0 text=""></Label>
-		<Button col=2 row=0 class="btn btn-primary" text="Done" (tap)="done()"></Button>
+		<Button margin=5 col=2 row=0 class="btn btn-primary" text="Done" (tap)="done()"></Button>
 	</GridLayout>
 
 </GridLayout>

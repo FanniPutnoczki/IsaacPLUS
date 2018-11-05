@@ -4,37 +4,28 @@ import { HttpService } from "../../shared/http.service";
 @Injectable()
 export class RoutinesService {
 
-    private getSkillsUrl: string = "skills/get";
-    private enableSkillUrl: string = "skills/enable/";
-    private disableSkillUrl: string = "skills/disable/";
+    private getRoutinesUrl: string = "routines";
+    private getRoutineUrl: string = "routines/";
+    private addRoutineUrl: string = "routines/add";
+    private deleteRoutineUrl: string = "routines/delete/";
+    
 
     constructor(private httpService: HttpService) { }
 
     getRoutine(id: string) {
+        return this.httpService.get(this.getRoutineUrl+id);
+    }
 
+    deleteRoutine(id: string) {
+        return this.httpService.get(this.deleteRoutineUrl+id);
     }
 
     getRoutines(){
-
-        //return this.httpService.get(this.getSkillsUrl);
-
-/*        let skills: Skill[] = [
-            {
-                name: "Hello",
-                url: "...",
-                enabled: false
-            },
-            {
-                name: "Lamp",
-                url: "...",
-                enabled: true
-            }
-        ]
-        return skills;*/
+        return this.httpService.get(this.getRoutinesUrl);
     }
 
     addRoutine(routine: any) {
-
+        return this.httpService.post(this.addRoutineUrl, routine);
     }
 
 }

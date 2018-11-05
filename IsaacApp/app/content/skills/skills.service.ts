@@ -12,22 +12,7 @@ export class SkillsService {
     constructor(private httpService: HttpService) { }
 
     getSkills(){
-
         return this.httpService.get(this.getSkillsUrl);
-
-/*        let skills: Skill[] = [
-            {
-                name: "Hello",
-                url: "...",
-                enabled: false
-            },
-            {
-                name: "Lamp",
-                url: "...",
-                enabled: true
-            }
-        ]
-        return skills;*/
     }
 
     resolveSkill(skill: any) {

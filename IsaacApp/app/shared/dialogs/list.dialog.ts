@@ -13,7 +13,7 @@ import { ModalDialogParams } from "nativescript-angular/modal-dialog";
         <GridLayout [visibility]="minimized ? 'collapse' : 'visible'" columns="*" rows="*,auto">
             <ListView separatorColor="#ffffff" row=0 col=0 [items]="filterItems()">
                 <ng-template let-item="item">
-                    <Label class="fancy-list-item" (tap)="submit(true, item)" text="{{ item[key] }}"></Label>
+                    <Label class="h4" padding=5 (tap)="submit(true, item)" text="{{ item[key] }}"></Label>
                 </ng-template>
             </ListView>
             <GridLayout row=1 col=0 rows="auto" columns="auto,*">
@@ -61,8 +61,8 @@ export class ListDialog {
             filteredItems = this.items;
         } else {
             for (var i = 0; i < this.items.length; i++) {
-                if(this.items[this.key][i].toUpperCase().indexOf(this.phrase.toUpperCase()) >= 0) {
-                    filteredItems.push(this.items[this.key][i]);
+                if(this.items[i][this.key].toUpperCase().indexOf(this.phrase.toUpperCase()) >= 0) {
+                    filteredItems.push(this.items[i]);
                 }
             }
         }

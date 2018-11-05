@@ -5,7 +5,10 @@ import { ModalDialogService } from "nativescript-angular/modal-dialog";
 import { SkillsService } from "../skills/skills.service";
 import { ListDialog } from "../../shared/dialogs/list.dialog";
 import { DatePickerDialog } from "../../shared/dialogs/date.picker.dialog";
-
+import { TimePicker } from "tns-core-modules/ui/time-picker";
+import { RoutinesService } from "./routines.service";
+import { PageRoute } from "nativescript-angular/router";
+import { switchMap } from "rxjs/operators";
 
 @Component({
     selector: "routines-add",
@@ -13,39 +16,56 @@ import { DatePickerDialog } from "../../shared/dialogs/date.picker.dialog";
 })
 export class RoutinesAddComponent {
 
-	private isNew
 	private skills;
 	private routine;
 	private days = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 	private dayDisplay;
+	private timePicker;
+    private id;
 
     constructor(
+        private pageRoute: PageRoute,
     	private modalService: ModalDialogService,
     	private skillsService: SkillsService,
+    	private routinesService: RoutinesService,
         private viewContainerRef: ViewContainerRef,
         private routerExtensions: RouterExtensions) {
 
         this.getSkills();
 
-        this.isNew = true;
+        this.pageRoute.activatedRoute.pipe(
+            switchMap(activatedRoute => activatedRoute.params)
+        ).forEach((params) => { this.id = params["id"]; console.log(this.id);});
 
-        if(this.isNew) {
-        	let d = new Date();
-        	this.routine = {
-	        	days: [false,false,false,false,false,false,false],
-	        	skills: [],
-	        	date: {
-	        		day: d.getDate(),
-	        		month: d.getMonth()+1,
-	        		year: d.getFullYear()
-	        	}
-	        };
-        } else {
-        	//TODO get routine data based on id from route parameter
+    	let d = new Date();
+    	this.routine = {
+        	days: [false,false,false,false,false,false,false],
+        	skills: [],
+        	date: {
+        		day: d.getDate(),
+        		month: d.getMonth()+1,
+        		year: d.getFullYear()
+        	},
+        	name: '',
+        	recurring: false,
+        	message: '',
+        	enabled: true
+        };
+        this.setFormattedDate();
+        
+        if(this.id) {
+            this.routinesService.getRoutine(this.id).subscribe(r => {
+                if(r) {
+                    console.log(r);
+                    this.routine = r;
+                    this.setFormattedDate();
+                    this.setTime();
+                } else {
+                    //TODO handle error
+                }
+            });
         }
 
-        this.setFormattedDate();
-    
     }
 
     setFormattedDate() {
@@ -76,20 +96,6 @@ export class RoutinesAddComponent {
     	this.routine.skills = newSkills;
     }
 
-    done() {
-    	//TODO validate
-    	let valid = true;
-    	if(valid) {
-    		this.routerExtensions.navigate(["/content"], {
-	            transition: {
-	                name: "slideLeft",
-	                duration: 500,
-	                curve: "linear"
-	            }
-	        });
-    	}
-    }
-
     pickDate() {
     	this.modalService.showModal(DatePickerDialog, {
     		viewContainerRef: this.viewContainerRef,
@@ -110,29 +116,62 @@ export class RoutinesAddComponent {
     		viewContainerRef: this.viewContainerRef,
     		context: {
     			items: this.skills,
-    			key: "name"
+    			key: "name",
+    			searchBar: true
     		}
     	}).then(r => {
     		
     		if(r.result) {
-    			this.routine.skills.push(r.name);
+    			this.routine.skills.push(r.data.name);
     		}
 
     	});
     }    
 
-    onTimeChanged(event) {
-
+    onPickerLoaded(args) {
+        this.timePicker = <TimePicker>args.object;
+        this.setTime();
     }
 
     cancel() {
         this.routerExtensions.navigate(["/content"], {
             transition: {
-                name: "slideLeft",
+                name: "fade",
                 duration: 500,
                 curve: "linear"
             }
         });
+    }
+
+    setTime() {
+        if(this.timePicker) {
+            this.timePicker.hour = this.routine.time.hour;
+            this.timePicker.minute = this.routine.time.minute;
+        }
+    }
+
+    done() {
+
+    	this.routine.time = {
+    		hour: this.timePicker.hour,
+    		minute: this.timePicker.minute
+    	};
+
+    	//TODO validate
+    	let valid = true;
+
+    	if(valid) {
+    		console.log(this.routine);
+    		this.routinesService.addRoutine(this.routine).subscribe(r => {
+    			this.routerExtensions.navigate(["/content"], {
+		            transition: {
+		                name: "fade",
+		                duration: 500,
+		                curve: "linear"
+		            }
+		        });
+    		});
+    	}
     }
     
 }

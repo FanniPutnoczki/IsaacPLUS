@@ -14,4 +14,9 @@ VOICE="gtts"
 
 ASSISTANT_NAME="isaac"
 
+#key from azure cognitive services
+MICROSOFT_KEY = "your_key"
+
+
+
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
