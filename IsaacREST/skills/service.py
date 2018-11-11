@@ -2,6 +2,7 @@ import os, pkgutil, settings, logging
 import connection
 from bson.json_util import dumps, loads
 from queue import Queue
+import voice.conversation as conversation
 
 skills = connection.mongo.isaac.skills
 

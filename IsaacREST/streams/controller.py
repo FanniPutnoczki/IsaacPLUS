@@ -8,12 +8,12 @@ streams_api = Blueprint('streams_api', __name__)
 logger = logging.getLogger()
 
 @streams_api.route('/<id>', methods=['GET'])
-def getStreamData(id):
-    return dumps(service.getStreamData(id))
+def get_stream_data(id):
+    return dumps(service.get_stream_data(id))
 
 
 @streams_api.route('/', methods=['GET'])
-def getStreams():
+def get_streams():
     logger.info('getting streams ')
     streams = []
     for stream in service.getStreams():

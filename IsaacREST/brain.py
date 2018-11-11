@@ -10,24 +10,26 @@ import voice.conversation as conversation
 logger = logging.getLogger()
 logger.info("starting brain")
 
-kw = stt.KeywordListener()
-
+stt.generate_keyword_list()
 skills.insertSkills()
 streams.startStreams()
-stt.generate_keyword_list()
 routines.start_routine_listener()
+
+kw = stt.KeywordListener()
+cl = stt.CommandListener()
+
 kw.start_passive_listen()
 
 while True:
 	if kw.keyword_said():
-		print("keyword said")
 		kw.stop_passive_listen()
 		while True:
-			command = stt.get_command(8)
+			command = cl.get_command(4)
 			firstRound = True
 			try:
 				skill = skills.find_match(command)
-				skills.handle_skill(skill, None)
+				logger.info("match found, handling skill: " + skill.NAME)
+				skills.run_skill(skill, None)
 				firstRound = False
 			except ModuleNotFoundError:
 				logger.info("no skill found for: " + command)
@@ -36,8 +38,12 @@ while True:
 			if (command == ""):
 				kw.start_passive_listen()
 				break
-
+	
 	else:
+		stopped = False
+		if((not routines.queue.empty()) or (not skills.complex_skill_queue.empty())):
+			stopped = True
+			kw.stop_passive_listen()
 		while not routines.queue.empty():
 			routine = routines.queue.get()
 			logger.info("executing routine: " + routine.name)
@@ -49,6 +55,7 @@ while True:
 			skill = skills.complex_skill_queue.get()
 			logger.info("executing skill from complex_skill_queue: " + skill.NAME)
 			skills.run_skill(skill)
+		if(stopped):
+			kw.start_passive_listen()
 		#todo resolve routine conversations and execute them if they are in the queue
-
 	time.sleep(1)

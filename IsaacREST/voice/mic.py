@@ -7,9 +7,10 @@ RATE = 16000
 FORMAT = pyaudio.paInt16
 CHANNELS = 2
 
-#TODO stream from mic instead of file
+#TODO threshold
 def record_from_mic(file_path):
-    threshold = calibrate_silence_treshold() + 20
+    #threshold = calibrate_silence_treshold() + 20
+    threshold = 150
     starter_silence = 0
     in_speech_silence = 0
     speech_started = False
@@ -18,10 +19,8 @@ def record_from_mic(file_path):
     stream = p.open(format = FORMAT,
                     rate = RATE,
                     channels = CHANNELS,
-                    output = True,
                     input = True,
-                    frames_per_buffer = CHUNK)
-    print(threshold)    
+                    frames_per_buffer = CHUNK)   
     print ("recording...")
     while True:
         data = stream.read(CHUNK)
@@ -36,7 +35,7 @@ def record_from_mic(file_path):
             speech_started = True
             in_speech_silence=0
         #abt max 3 sec before speech
-        if(starter_silence >= 50):
+        if(starter_silence >= 40):
             break
         #abt max 2 sec between words (increase to 30 if too few)
         if(in_speech_silence >= 25):

@@ -18,7 +18,7 @@ def getStreams():
 			streams.append(stream)
 	return streams
 
-def getStreamData(id):
+def get_stream_data(id):
 	return streamsDict[id]
 
 def startStreams():
@@ -29,6 +29,7 @@ def startStreams():
 		stream.initStream()
 		logger.info("starting thread: " + stream.NAME)
 		t=threading.Thread(target=worker, args=(stream, streamsDict,))
+		t.daemon = True
 		t.start()
 	logger.info("starting streams finished")
 
@@ -36,6 +37,6 @@ def startStreams():
 def worker(stream, streams):
 	while True:
 		streams[stream.ID] = stream.getValue()
-		#logger.info("refreshed stream value: " + stream.NAME)
+		logger.info("refreshed stream value: " + stream.NAME)
 		#logger.info(streams[stream.ID])
 		time.sleep(stream.REFRESH_RATE)

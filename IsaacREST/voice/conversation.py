@@ -1,7 +1,8 @@
-import voice.stt as stt
-import voice.tts as tts
+# import voice.stt as stt
+# import voice.tts as tts
 from json import dumps, loads
-
+from voice import stt as stt
+from voice import tts as tts
 #example conversation for testing purposes
 CONVERSATION=[
 	{
@@ -57,13 +58,13 @@ def handle_conversation(cons, answers):
 	#TODO long and short input should be different
 	for con in cons:
 		for key in answers:
-			print(key)
-			print(answers[key])
+			#print(key)
+			#print(answers[key])
 			text_con = dumps(con)
 			text_con = text_con.replace("<answer[" + key + "]>", answers[key]["text"])
 			con = loads(text_con)
-			print(con)
-		print(con["prompt"])
+			#print(con)
+		#print(con["prompt"])
 		tts.say(con["prompt"])
 		if "input" in con:
 			#answer = input()

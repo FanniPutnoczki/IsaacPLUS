@@ -32,6 +32,7 @@ def recognize_speech(file_path, long=False):
     r = requests.post(url, headers=headers, data=stream_file(file_path))
     results = json.loads(r.content)
     return results
+    pass
 
 def stream_file(file_path):
     with open(file_path, 'rb') as f:

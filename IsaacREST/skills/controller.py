@@ -60,7 +60,7 @@ def disable(name):
     return dumps(name)
 
 @skills_api.route('/get', methods=['GET'])
-def getAll():
+def get_all():
     skills = []
     for skill in service.collectSkills():
         convo = []

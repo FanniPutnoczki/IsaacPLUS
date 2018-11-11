@@ -40,7 +40,6 @@ def start_routine_listener():
 	logger.info("starting routine listener")
 	thread = Thread(target=__listen__, args=(queue,))
 	thread.start()
-	pass
 
 def handle_routine():
 	pass

@@ -15,8 +15,9 @@ DESCRIPTION=''
 
 KEYWORDS = ['test']
 
-CONVERSATION=[]
+CONVERSATION=[
+	{ "prompt": "testing skill" }
+]
 
-#this is not a conversation skill so isaac won't say anything at the end of the skill
-def do():
+def do(answers):
     pass
