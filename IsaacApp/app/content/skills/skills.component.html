@@ -6,7 +6,7 @@
 				<StackLayout *ngFor="let item of skills">
 					<GridLayout class="box" columns="auto, *, auto" rows="auto">
 						<Image verticalAlignment="center" col=0 row=0 (tap)="runSkill(item)" src="res://run" stretch="none" class="img-round"></Image>
-						<Label verticalAlignment="center" col=1 row=0 class="h3" text="{{ item.name }}"></Label>
+						<Label verticalAlignment="center" col=1 row=0 class="h4" text="{{ item.full_name }}"></Label>
 						<Switch col=2 row=0 class="switch" checked="{{item.enabled}}" (checkedChange)="onSkillEnabled($event, item)"></Switch>
 					</GridLayout>
 				</StackLayout>

@@ -6,14 +6,14 @@
 			<Label class="h4" text="Name"></Label>
 			<TextField [(ngModel)]="routine.name"></TextField>
 			
-			<Label verticalAlignment="center" col=0 row=0 class="h4" text="Skills to run"></Label>
+			<Label verticalAlignment="center" marginTop=5 col=0 row=0 class="h4" text="Skills to run"></Label>
 			<StackLayout>
 				<StackLayout orientation="horizontal" (tap)="pickSkill()">
 					<Label verticalAlignment="center" class="h4" text="+ "></Label>
 					<Label verticalAlignment="center" text="Add a skill"></Label>
 				</StackLayout>
 				<GridLayout class="small-box" *ngFor="let skill of routine.skills" columns="auto, *, auto" rows="auto">
-					<Label verticalAlignment="center" col=0 row=0 class="h4" text="{{skill}}"></Label>
+					<Label verticalAlignment="center" col=0 row=0 class="h4" text="{{ skillNameMap[skill] }}"></Label>
 					<Label col=1 row=0 text=""></Label>
 					<Label verticalAlignment="center" col=2 row=0 class="" text="x" (tap)="removeSkill(skill)"></Label>
 				</GridLayout>	

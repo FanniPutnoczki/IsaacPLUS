@@ -22,6 +22,7 @@ export class RoutinesAddComponent {
 	private dayDisplay;
 	private timePicker;
     private id;
+    private skillNameMap;
 
     constructor(
         private pageRoute: PageRoute,
@@ -32,6 +33,7 @@ export class RoutinesAddComponent {
         private routerExtensions: RouterExtensions) {
 
         this.getSkills();
+        this.skillNameMap = {};
 
         this.pageRoute.activatedRoute.pipe(
             switchMap(activatedRoute => activatedRoute.params)
@@ -79,6 +81,9 @@ export class RoutinesAddComponent {
     	this.skillsService.getSkills().subscribe(r => {
         	if(r) {
         		this.skills = r;
+                for(let skill of r) {
+                    this.skillNameMap[skill.name] = skill.full_name;
+                }
         	} else {
         		this.skills = [];
         	}
@@ -116,7 +121,7 @@ export class RoutinesAddComponent {
     		viewContainerRef: this.viewContainerRef,
     		context: {
     			items: this.skills,
-    			key: "name",
+    			key: "full_name",
     			searchBar: true
     		}
     	}).then(r => {

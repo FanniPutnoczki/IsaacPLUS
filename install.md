@@ -30,4 +30,5 @@ python main.py
 sudo pip install flask-restful
 5. install mongodb then install the python mongo module
 pip install flask-pymongo
-
+6. install mpg123
+sudo apt-get install mpg321

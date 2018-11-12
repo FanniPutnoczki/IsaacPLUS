@@ -2,7 +2,7 @@ from flask_restful import Resource, Api
 
 # name(=id) of the skill, it must be unique and one word
 NAME='Test'
-FULL_NAME="Test Hello World"
+FULL_NAME="Switch off lamp"
 
 #Should it appear in the mobile app?
 HIDDEN=False

@@ -30,11 +30,8 @@ while True:
 				skill = skills.find_match(command)
 				logger.info("match found, handling skill: " + skill.NAME)
 				skills.run_skill(skill, None)
-				firstRound = False
 			except ModuleNotFoundError:
 				logger.info("no skill found for: " + command)
-				if not firstRound:
-					tts.say("I'm sorry. I don't understand.")
 			if (command == ""):
 				kw.start_passive_listen()
 				break

@@ -11,5 +11,5 @@ def say(speech):
 	elif settings.VOICE == 'gtts':
 		os.system('gtts-cli -o temp.wav "' + speech+ '" ')
 		os.system('mpg123 temp.wav >/dev/null 2>&1')
-def generate():
-    pass
+
+

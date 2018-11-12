@@ -11,7 +11,7 @@
 								<Label text="{{ view.name }}"></Label>
 								<Label horizontalAlignment="right" col=1 text="{{ view.data ? (view.data.display ? view.data.display : '') : 0 }}"></Label>
 							</GridLayout>
-							<Progress marginTop=5 class="progress" [visibility]="view.type=='progress' ? 'visible' : 'collapse'"  [value]="view.data ? (view.data.value ? view.data.value : 0) : 0" max="{{ view.max }}"></Progress>
+							<Progress marginTop=5 class="progress" [visibility]="view.type=='progress' ? 'visible' : 'collapse'"  [value]="view.data ? (view.data.value ? view.data.value : 0) : 0" maxValue="{{ view.max }}"></Progress>
 						</StackLayout>
 					</StackLayout>
 				</StackLayout>

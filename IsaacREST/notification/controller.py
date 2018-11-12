@@ -27,19 +27,4 @@ def get(id):
 
 @notif_api.route('/', methods=['GET'])
 def get_all():
-    # ns = []
-    # for n in notifs.find():
-    #     try:
-    #         pretty = {
-    #             "id": n['_id'],
-    #             "date": n['date'],
-    #             "time": n['time'],
-    #             "enabled": n['enabled'],
-    #             "message": n['message'],
-    #             "task": n['task'],
-    #             "days": n['days']
-    #         }
-    #         ns.append(pretty)
-    #     except:
-    #         pass
     return dumps(service.get_all())

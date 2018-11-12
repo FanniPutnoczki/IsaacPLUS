@@ -9,7 +9,7 @@ from flask_cors import CORS, cross_origin
 from flask_httpauth import HTTPBasicAuth
 import streams.service
 
-logging.basicConfig(level=settings.LOG_LEVEL)
+# logging.basicConfig(level=settings.LOG_LEVEL)
 
 app = Flask(__name__)
 

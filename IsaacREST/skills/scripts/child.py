@@ -1,6 +1,6 @@
 
 NAME="child"
-FULL_NAME="Hello child"
+FULL_NAME="Open the door"
 HIDDEN=False
 PARENT="Hello"
 #child skills don't have keywords

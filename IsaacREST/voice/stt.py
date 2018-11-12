@@ -1,6 +1,7 @@
 import settings
 import os
-import skills.service as service
+from skills import service as service
+# import skills.service as service
 import time
 import logging
 import voice.bing as bing
@@ -44,7 +45,6 @@ class CommandListener():
             else:
                  break
             if self.decoder.hyp() != None:
-                print (self.decoder.hyp().hypstr)
                 answer = self.decoder.hyp().hypstr
                 self.decoder.end_utt()
                 stream.stop_stream()
