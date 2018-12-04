@@ -102,6 +102,7 @@ class KeywordListener:
 
 # TODO different length different threshold https://cmusphinx.github.io/wiki/tutoriallm/
 def generate_keyword_list():
+    logger.info("Generating keyword list")
     try:
         os.remove("keys.list")
     except OSError:
@@ -138,8 +139,6 @@ def get_command(timeout):
 
 def get_speech(long=False):
     mic.record_from_mic("temp.wav")
-    # speech = bing.recognize_speech("temp.wav", long)
-    # logger.info(speech)
-    # if speech["RecognitionStatus"] == "Success":
-    #     return speech["DisplayText"]
-    return ""
+    speech = bing.recognize_speech("temp.wav", long)
+    logger.info(speech)
+    return speech

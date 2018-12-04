@@ -36,12 +36,16 @@ def do(name):
         service.handle_skill(skill, answers)
     else:
         abort(405, 'skill is not enabled')
+    return dumps({'success':True}), 200, {'ContentType':'application/json'}
 
 @skills_api.route('/enable/<name>', methods=['GET'])
 def enable(name):
     logger.info('enabling skill: ' + name)
-    service.enable(name)
-    return dumps(name)
+    try:
+        service.enable(name)
+        return dumps("successful")
+    except Exception as e:
+        abort(404, 'skill not found') 
 
 @skills_api.route('/disable/<name>', methods=['GET'])
 def disable(name):

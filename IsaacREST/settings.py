@@ -10,12 +10,12 @@ USERNAME = "changeit"
 PASSWORD = "changeit"
 
 #values: gtts or pico, try out both and choose which voice do you prefer.
-VOICE="gtts"
+VOICE="pico"
 
 ASSISTANT_NAME="isaac"
 
 #key from azure cognitive services
-MICROSOFT_KEY = "your_key"
+MICROSOFT_KEY = ""
 
 
 

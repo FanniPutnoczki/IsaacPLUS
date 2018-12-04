@@ -16,10 +16,21 @@ def collectSkills():
     path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'scripts')
     for finder, modname, ispkg in pkgutil.walk_packages([path]):
         skill = finder.find_module(modname).load_module(modname)
-        if (hasattr(skill, 'NAME')):
-                logger.debug("skill found: " + getattr(skill, 'NAME'))
+        if (is_skill(skill)):
                 skills.append(skill)
     return skills
+
+def validate_skills():
+    path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'scripts')
+    for finder, modname, ispkg in pkgutil.walk_packages([path]):
+        skill = finder.find_module(modname).load_module(modname)
+        if is_skill(skill):
+            logger.info("skill found: " + skill.NAME)
+
+def is_skill(module):
+    if all(hasattr(module, attr) for attr in ["NAME", "KEYWORDS", "do"]) or all(hasattr(module, attr) for attr in ["NAME", "PARENT", "ANSWERS"]):
+        return True
+    return False
 
 def get_skill(name):
     all = collectSkills()
@@ -58,7 +69,8 @@ def enable(name):
                 'enabled': True
                 }
             })
-
+    else:
+        raise ModuleNotFoundError("Skill not found with name: " + name)
 #disables/enables skill
 def disable(name):
     skill = skills.find_one({'name': name })
@@ -97,19 +109,6 @@ def handle_skill(skill, answers):
         complex_skill_queue.put(skill, False)
     else:
         run_skill(skill, answers)
-    # if isEnabled(skill.NAME):
-    #     if hasattr(skill, "PARENT"):
-    #         parent = get_skill(skill.PARENT)
-    #         parent.do(skill.ANSWERS)
-    #     else:
-    #         if is_complex(skill):
-    #             if answers == None:
-    #                 complex_skill_queue.put(skill, False)
-    #                 pass
-    #             else:
-    #                 skill.do(answers)
-    #         else:
-    #             skill.do()
 
 # runs the skill inmediately. Use the handle_skill method because it's safer
 def run_skill(skill, answers):

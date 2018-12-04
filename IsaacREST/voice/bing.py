@@ -1,6 +1,7 @@
 import json
 import requests
 import settings
+import logging
 
 REGION = 'westeurope' # westus, eastasia, northeurope 
 MODE = 'interactive'
@@ -8,6 +9,8 @@ LANG = 'en-US'
 #TODO check what detailed returns
 FORMAT = 'simple'
 CHUNK = 1024
+
+logger = logging.getLogger()
 
 def get_token():
     url = 'https://api.cognitive.microsoft.com/sts/v1.0/issueToken'
@@ -30,9 +33,14 @@ def recognize_speech(file_path, long=False):
         'Authorization': 'Bearer {0}'.format(token)
     }
     r = requests.post(url, headers=headers, data=stream_file(file_path))
-    results = json.loads(r.content)
-    return results
-    pass
+    speech = ""
+    if r.ok:
+        results = json.loads(r.content)
+        if results["RecognitionStatus"] == "Success":
+            speech = results["DisplayText"]
+    else:
+        logger.error("Cannot connect to Bing speech recognition. Cause: " + r.reason)
+    return speech
 
 def stream_file(file_path):
     with open(file_path, 'rb') as f:
