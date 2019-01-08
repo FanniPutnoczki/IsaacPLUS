@@ -18,9 +18,9 @@ sudo apt-get install portaudio19-dev
 pip3 install pyaudio
 
 #sphinx
-sudo apt-get install autoconf gcc automake
 
 
 #sphinx-python
-sudo apt-get install swig libpulse-dev
+sudo apt-get install swig
+sudo apt-get install libpulse-dev
 pip3 install --upgrade pocketsphinx

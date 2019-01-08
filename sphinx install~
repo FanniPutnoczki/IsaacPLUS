@@ -1,4 +1,6 @@
-sudo apt-get install autoconf gcc automake swig
+sudo apt-get install autoconf
+sudo apt-get install automake
+sudo apt-get install swig (swig3)
 
 sphinx base folder:
 ./autogen.sh

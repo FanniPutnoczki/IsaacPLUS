@@ -8,6 +8,7 @@ I recommend you the official tutorial: https://www.raspberrypi.org/documentation
 4. Install the packages required by Isaac
 
 sudo pip install pymongo
+sudo pip install flask_cors
 pip install setuptools
 sudo apt-get install portaudio19-dev
 pip install pyaudio
