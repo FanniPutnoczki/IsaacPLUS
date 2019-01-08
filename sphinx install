@@ -14,6 +14,8 @@ make clean all
 make check
 sudo make install
 
+
+
 pocketsphynx python module install
 git clone https://github.com/cmusphinx/pocketsphinx-python.git
 python setup.py install

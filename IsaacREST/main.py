@@ -6,8 +6,8 @@ from streams.controller import streams_api
 import logging
 import settings
 import skills.service
-from flask_cors import CORS, cross_origin
-from flask_httpauth import HTTPBasicAuth
+#from flask_cors import CORS, cross_origin
+#from flask_httpauth import HTTPBasicAuth
 import streams.service
 from notification import handler as routines
 import threading
@@ -18,7 +18,7 @@ app = Flask(__name__)
 
 # config
 api = Api(app)
-cors = CORS(app)
+#cors = CORS(app)
 
 # blueprints
 app.register_blueprint(notif_api, url_prefix='/api/routines')
