@@ -28,8 +28,7 @@ unzip sphinx.zip
 
 cd sphinx/sphinxbase/
 chmod 777 autogen.sh
-#should autogen run twice?
-./autogen.sh
+#should it be run twice?
 ./autogen.sh
 ./configure
 make
@@ -42,8 +41,6 @@ cd ..
 
 cd pocketsphinx/
 chmod 777 ./autogen.sh
-#should it be ran twice?
-sudo ./autogen.sh
 sudo ./autogen.sh
 sudo make
 sudo make install
