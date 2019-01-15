@@ -2,6 +2,8 @@
 
 apt-get update
 
+pip3 install pyserial
+
 #mongodb
 apt-get install python3-pip mongodb 
 mkdir -p /data/db
