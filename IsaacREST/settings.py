@@ -1,4 +1,5 @@
 import logging
+import os
 
 MONGO_HOST='localhost'
 MONGO_PORT=27017
@@ -17,6 +18,6 @@ ASSISTANT_NAME="isaac"
 #key from azure cognitive services
 MICROSOFT_KEY = ""
 
-
+ISAAC_PATH=os.path.dirname(os.path.realpath(__file__))
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')

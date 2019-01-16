@@ -22,7 +22,7 @@ class CommandListener():
         config.set_string('-hmm', os.path.join(modeldir, 'en-us'))
         config.set_string('-logfn', '/dev/null')
         config.set_string('-dict', os.path.join(modeldir, 'en-us/cmudict-en-us.dict'))
-        config.set_string('-kws', "/home/fox/Git/IsaacPLUS/IsaacREST/keys.list")
+        config.set_string('-kws', (os.path.join(settings.ISAAC_PATH, "keys.list")))
         self.decoder = Decoder(config)
 
     # timeout is in seconds
