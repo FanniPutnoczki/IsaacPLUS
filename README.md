@@ -1,7 +1,7 @@
 # IsaacPLUS
 Isaac is an open source smart home platform that enables you to automatize and control your house in an easy way. The main inspiration for this project was JARVIS from Iron Man, though it hasn't reached that level yet. The project is still in progress but it will be soon released.
 
-## Some Features ##
+## Core Features ##
 * Easy to add new skills
 * It runs on a Raspberry PI
 * Schedule routines and reminders to automatize your home
