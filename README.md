@@ -1,12 +1,12 @@
 # IsaacPLUS
-Intelligent home automation project based on my older Isaac assistant. This is going to be a complete detailed guide for building your own fully functioning smart home system.
+Isaac is an open source smart home platform that enables you to automatize and control your house in an easy way. The main inspiration for this project was JARVIS from Iron Man, though it hasn't reached that level yet. The project is still in progress but it will be soon released.
 
 ## Some Features ##
-* Intelligent Personal Assistant
-* Home Media Center
-* File Server
-* Dashboard accessible from the browser
 * Easy to add new skills
-* REST based
-* Voice Controlled
+* It runs on a Raspberry PI
+* Schedule routines and reminders to automatize your home
+* Features an Android app for remote control
+* Read and display data through the mobile dashboard
+* Automatically generated REST API for easier integration
+* Voice controlled
 
