@@ -2,3 +2,4 @@ IsaacApp/node_modules/
 IsaacApp/platforms/
 IsaacApp/hooks/
 IsaacApp/app/**.js
+**/**.pyc

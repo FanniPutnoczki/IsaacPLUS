@@ -16,7 +16,7 @@ VIEW=[
 ]
 
 logger = logging.getLogger()
-ser = serial.Serial('/dev/ttyACM0', 9600)
+#ser = serial.Serial('/dev/ttyACM0', 9600)
 
 def initStream():
 	pass
@@ -24,10 +24,10 @@ def initStream():
 
 def getValue():
 	data=""
-	try:	
-		data = (str.strip((ser.readline().decode("utf-8"))))
-	except:
-		pass	
+	#try:	
+		#data = (str.strip((ser.readline().decode("utf-8"))))
+	#except:
+	#	pass	
 	return [
-	{'value': data, 'display': data + " C"}
+	{'value': 24, 'display': "24" + " C"}
 	]
