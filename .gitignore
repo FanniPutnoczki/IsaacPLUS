@@ -1,12 +1,5 @@
-<<<<<<< HEAD
-IsaacApp/node_modules/
-IsaacApp/platforms/
-IsaacApp/hooks/
-IsaacApp/app/**.js
-=======
 IsaacApp/node_modules/
 IsaacApp/platforms/
 IsaacApp/hooks/
 IsaacApp/app/**.js
 **/**.pyc
->>>>>>> c87ed6efae07c2fc7ad6b79f542b3e62ec7a6f86
