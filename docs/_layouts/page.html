@@ -1,14 +1,7 @@
 ---
+theme :
+  name : bootstrap-3
 layout: default
 ---
-<article>
-
-  <header>
-    <h1>{{ page.title | escape }}</h1>
-  </header>
-
-  <section>
-    {{ content }}
-  </section>
-
-</article>
+{% include JB/setup %}
+{% include themes/bootstrap-3/page.html %}
