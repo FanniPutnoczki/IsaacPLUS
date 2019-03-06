@@ -1,5 +1,8 @@
-# IsaacPLUS
-Isaac is an open source smart home platform that enables you to automatize and control your house in an easy way. The main inspiration for this project was JARVIS from Iron Man, though it hasn't reached that level yet. The project is still in progress but it will be soon released.
+# I.S.A.A.C.
+## Intelligent Speaking Assistant And Computer
+Isaac is an IoT smart home platform that enables you to automatize and control your house (or anything else you want) in an easy, voice-driven way. 
+
+The main inspiration for this project was JARVIS from Iron Man, though it hasn't reached that level yet. The project is still in progress but it will be released soon.
 
 ## Core Features ##
 * Easy to add new skills
