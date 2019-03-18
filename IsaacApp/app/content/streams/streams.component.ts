@@ -21,7 +21,6 @@ export class StreamsComponent {
         this.connectionError = false;
         this.streams = [];
         this.loadMask = false;
-        //this.intervalsStarted = true;
         this.refresh();
     }
     
@@ -36,7 +35,6 @@ export class StreamsComponent {
                 this.connectionError = false;
                 this.loadMask = false;
                 this.streams = r
-                //console.dir(this.streams);
                 for(let stream of this.streams) {
                     this.setData(stream);
                 }
@@ -58,13 +56,11 @@ export class StreamsComponent {
                     stream.view[i].data = r[i];
                 }
             }
-            //console.dir(stream);
         });
     }
 
     startIntervals() {
         console.log("adding intervals")
-        //this.intervalsStarted = true;
         for(let stream of this.streams) {
             stream["interval"] = setInterval(() => {
                 this.setData(stream);

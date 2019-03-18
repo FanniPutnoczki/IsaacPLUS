@@ -8,7 +8,6 @@ import { RoutinesService } from "./routines.service";
 })
 export class RoutinesComponent {
 
-	//TODO here refresh only on refresh button press, navigation and on opening, and on new add. no intervals needed 
 	private connectionError;
 	private routines;
 	private loadMask;
@@ -28,7 +27,6 @@ export class RoutinesComponent {
             if(r == undefined) {
                 this.connectionError = true;
             } else {
-                //console.log(r);
                 this.routines = r;
                 this.formatRoutines();
                 this.connectionError = false;
@@ -65,8 +63,6 @@ export class RoutinesComponent {
     deleteRoutine(routine: any) {
         this.routinesService.deleteRoutine(routine._id.$oid).subscribe(r => {
             console.log(r);
-            //TODO in case of error refresh and show message
-            
         });
         let index = 0;
         for (var i = 0; i < this.routines.length; i++) {

@@ -85,7 +85,6 @@ export class SkillsComponent {
 		});
 	}
 
-	//TODO here refresh only on refresh button press, navigation and on opening.. no intervals needed 
 	refresh() {
 		console.log("refreshing skills");
 		this.skills = [];

@@ -1,7 +1,4 @@
 #!/bin/sh
 
-mongod
-
-cd IsaacREST
-python3 main.py
+python3 ./IsaacREST/main.py
 
