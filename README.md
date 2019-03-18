@@ -28,7 +28,7 @@ Then open up a terminal in the *IsaacPLUS* folder and type the following:
 
 This command will take care of almost everything, however, to make the voice recognition service work, you need to create a free **Azure account** and get an API key from them. 
 
-If you need help setting up your account, check out out Wiki page for a detailed installation guide.
+If you need help setting up your account, check out our Wiki page for a detailed installation guide.
 
 ## How to use it
 
@@ -36,4 +36,4 @@ You can start Isaac by running the main.py file:
 
 `python3 main.py`
 
-After that Isaac starts to listen to your commands. Say "*Isaac*" and wait for a beeping sound, that means that he is listening to your command.
+After that Isaac starts to listen to your commands. Say "*Isaac*" and wait for a beeping sound, that means that he is listening to your commands.
