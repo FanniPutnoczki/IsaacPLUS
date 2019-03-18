@@ -79,10 +79,5 @@ def handle_conversation(cons, answers):
 						handle_conversation(childCon, answers)
 						break
 						
-
-
-# answ = dict()
-# handle_conversation(CONVERSATION, answ)
-# print (answ)
 	
 

@@ -1,4 +1,4 @@
 #!/bin/sh
 
-python3 ./IsaacREST/main.py
-
+cd IsaacREST
+python3 main.py

@@ -1,7 +1,6 @@
 import settings
 import os
 from skills import service as service
-# import skills.service as service
 import time
 import logging
 import voice.bing as bing

@@ -3,7 +3,7 @@ import voice.tts as tts
 import logging
 import skills.service as skills
 import streams.service as streams
-import notification.handler as routines
+import routines.handler as routines
 import time
 import voice.conversation as conversation
 import threading
@@ -41,7 +41,7 @@ def brain(routine_queue, complex_skill_queue):
 				kw.stop_passive_listen()
 			while not routine_queue.empty():
 				routine = routines.queue.get()
-				logger.info("executing routine: " + routine.name)
+				logger.info("executing routine: " + routine["name"])
 				tts.say(routine["message"])
 				for skill_name in routine["skills"]:
 					skill = skills.get_skill(skill_name)
@@ -54,7 +54,3 @@ def brain(routine_queue, complex_skill_queue):
 				kw.start_passive_listen()
 		time.sleep(1)
 
-
-# brain_thread = threading.Thread(target = brain, args=(routines.queue, skills.complex_skill_queue,))
-# brain_thread.start()
-# brain(routines.queue, skills.complex_skill_queue)

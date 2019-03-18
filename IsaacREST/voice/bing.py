@@ -3,10 +3,9 @@ import requests
 import settings
 import logging
 
-REGION = 'westeurope' # westus, eastasia, northeurope 
+REGION = 'westeurope'
 MODE = 'interactive'
 LANG = 'en-US'
-#TODO check what detailed returns
 FORMAT = 'simple'
 CHUNK = 1024
 
