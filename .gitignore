@@ -4,6 +4,6 @@ IsaacApp/platforms/
 
 IsaacApp/hooks/
 
-IsaacApp/app/**.js
+IsaacApp/app/**/*.js
 
 **/**.pyc
