@@ -14,6 +14,9 @@ The main inspiration for this project was JARVIS from Iron Man, though it hasn't
 * Voice controlled
 * And more
 
+## Control it with your phone ##
+![image](https://github.com/FanniPutnoczki/IsaacPLUS/blob/master/image.jpg?raw=true)
+
 ## Getting Started
 
 Installing Isaac is a really simple process. All you need is a Linux compatible computer, a microphone and a speaker. You can also control Isaac with your smartphone, but the app is only available for Android now.
