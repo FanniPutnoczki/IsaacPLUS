@@ -27,8 +27,8 @@ def __listen__(queue):
 					if  routine["date"]["day"] == now.day and \
 						routine["date"]["month"] == now.month and \
 						routine["date"]["year"] == now.year and \
-						routine["time"]["hour"] == now.day and \
-						routine["time"]["minute"] == now.day:
+						routine["time"]["hour"] == now.hour and \
+						routine["time"]["minute"] == now.minute:
 						queue.put(routine, False)
 						service.delete(routine["_id"]["$oid"])
 		time.sleep(60)
