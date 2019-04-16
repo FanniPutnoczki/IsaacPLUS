@@ -2,6 +2,8 @@ import voice.stt as stt
 import voice.tts as tts
 import time
 
+print("say Isaac")
+
 kw = stt.KeywordListener()
 kw.start_passive_listen()
 while True:

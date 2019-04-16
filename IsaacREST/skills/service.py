@@ -37,7 +37,7 @@ def get_skill(name):
     for skill in all:
         if skill.NAME == name:
             return skill
-    raise ModuleNotFoundError("Skill not found with name: " + name)
+    raise ImportError("Skill not found with name: " + name)
 
 
 #checks if skill is enabled
@@ -70,7 +70,7 @@ def enable(name):
                 }
             })
     else:
-        raise ModuleNotFoundError("Skill not found with name: " + name)
+        raise ImportError("Skill not found with name: " + name)
 #disables/enables skill
 def disable(name):
     skill = skills.find_one({'name': name })
@@ -99,7 +99,7 @@ def find_match(command):
             for kw in skill.KEYWORDS:
                 if kw in command:
                     return skill
-    raise ModuleNotFoundError("Cannot find skill for command: " + command)
+    raise ImportError("Cannot find skill for command: " + command)
 
 def is_complex(skill):
     return (hasattr(skill,"CONVERSATION"))

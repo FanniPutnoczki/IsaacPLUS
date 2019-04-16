@@ -110,7 +110,7 @@ def generate_keyword_list():
     for skill in service.collectSkills():
         if hasattr(skill, "KEYWORDS"):
             for kw in skill.KEYWORDS:
-                f.write(kw + r' /1e-1/')
+                f.write(kw + r' /1e-5/')
                 f.write("\n")
     f.close()
 

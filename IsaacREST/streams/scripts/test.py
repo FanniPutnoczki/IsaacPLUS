@@ -3,7 +3,7 @@ from random import randint
 
 #refresh rate in secs
 REFRESH_RATE=10
-NAME="Fish Tank Datastream"
+NAME="TEST Datastream"
 ID="teststream"
 
 # type of display on the mobile app. values: text or progress, in case of progress bar, a min and max value is needed too

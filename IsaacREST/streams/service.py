@@ -37,6 +37,6 @@ def startStreams():
 def worker(stream, streams):
 	while True:
 		streams[stream.ID] = stream.getValue()
-		logger.info("refreshed stream value: " + stream.NAME)
+		#logger.info("refreshed stream value: " + stream.NAME)
 		#logger.info(streams[stream.ID])
 		time.sleep(stream.REFRESH_RATE)

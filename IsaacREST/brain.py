@@ -28,7 +28,7 @@ def brain(routine_queue, complex_skill_queue):
 					skill = skills.find_match(command)
 					logger.info("match found, handling skill: " + skill.NAME)
 					skills.run_skill(skill, None)
-				except ModuleNotFoundError:
+				except ImportError:
 					logger.info("no skill found for: " + command)
 				if (command == ""):
 					kw.start_passive_listen()

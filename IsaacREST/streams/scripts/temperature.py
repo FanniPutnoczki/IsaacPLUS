@@ -1,9 +1,10 @@
 import logging
 import serial
 import time 
+import requests 
 
 #refresh rate in secs
-REFRESH_RATE=2
+REFRESH_RATE=3600
 NAME="Arduino Sensor Measurements"
 ID="temperature"
 
@@ -21,13 +22,25 @@ logger = logging.getLogger()
 def initStream():
 	pass
 
+URL = "http://api.openweathermap.org/data/2.5/weather"
+
+PARAMS = {
+	"q": "Miskolc",
+	"APPID":"47ca94dfbd46fd3f8d28f12027d8d9d3"
+}
 
 def getValue():
-	data=""
+
+	r = requests.get(url = URL, params=PARAMS) 
+  
+	# extracting data in json format 
+	data = r.json() 
+	temp = round(data["main"]["temp"]-273)
 	#try:	
+		#for arduino code
 		#data = (str.strip((ser.readline().decode("utf-8"))))
 	#except:
 	#	pass	
 	return [
-	{'value': 24, 'display': "24" + " C"}
+	{'value': temp, 'display': str(temp) + " C"}
 	]
