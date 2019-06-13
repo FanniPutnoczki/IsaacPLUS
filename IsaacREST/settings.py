@@ -3,6 +3,7 @@ import os
 
 MONGO_HOST='localhost'
 MONGO_PORT=27017
+MONGO_URI='...'
 
 HOST = '0.0.0.0'
 PORT = 5000
